@@ -2,5 +2,131 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "dynamic-component": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/dynamic-component",
+      "sourceRoot": "projects/dynamic-component/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/dynamic-component",
+            "index": "projects/dynamic-component/src/index.html",
+            "main": "projects/dynamic-component/src/main.ts",
+            "polyfills": "projects/dynamic-component/src/polyfills.ts",
+            "tsConfig": "projects/dynamic-component/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/dynamic-component/src/favicon.ico",
+              "projects/dynamic-component/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "projects/dynamic-component/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/dynamic-component/src/environments/environment.ts",
+                  "with": "projects/dynamic-component/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "dynamic-component:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "dynamic-component:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "dynamic-component:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/dynamic-component/src/test.ts",
+            "polyfills": "projects/dynamic-component/src/polyfills.ts",
+            "tsConfig": "projects/dynamic-component/tsconfig.spec.json",
+            "karmaConfig": "projects/dynamic-component/karma.conf.js",
+            "assets": [
+              "projects/dynamic-component/src/favicon.ico",
+              "projects/dynamic-component/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "projects/dynamic-component/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/dynamic-component/tsconfig.app.json",
+              "projects/dynamic-component/tsconfig.spec.json",
+              "projects/dynamic-component/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/dynamic-component/e2e/protractor.conf.js",
+            "devServerTarget": "dynamic-component:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "dynamic-component:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "dynamic-component"
 }
