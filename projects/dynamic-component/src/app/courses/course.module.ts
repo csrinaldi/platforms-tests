@@ -17,6 +17,13 @@ import {ReactiveFormsModule} from '@angular/forms';
     CommonsModule,
     SCHEDULER_ROUTERS
   ],
+  exports: [
+    CourseSearchFormComponent
+  ],
+  entryComponents: [
+    CourseSearchFormComponent
+  ],
   providers: [],
 })
-export class CourseModule { }
+export class CourseModule {
+}

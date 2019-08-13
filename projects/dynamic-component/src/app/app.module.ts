@@ -18,7 +18,8 @@ import {CommonsModule} from './commons/commons.module';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    CommonsModule],
+    CommonsModule.forRoot()
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

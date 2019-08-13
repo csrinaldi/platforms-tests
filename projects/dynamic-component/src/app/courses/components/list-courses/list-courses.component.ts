@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ComponentFactoryResolver, Inject, Injector, OnInit} from '@angular/core';
 import {Course} from '../../domain/course';
+import {ResolverService} from '../../../commons/resolver.service';
 
 @Component({
   selector: 'app-list-courses',
@@ -10,7 +11,10 @@ export class ListCoursesComponent implements OnInit {
 
   courses: Course[] = [];
 
-  constructor() { }
+  constructor(private resolverService: ResolverService, private resolver: ComponentFactoryResolver, private injector: Injector) {
+    console.log("Construyendo ...." + resolverService.n);
+    resolverService.receiveContext(resolver, injector);
+  }
 
   ngOnInit() {
   }
