@@ -1,8 +1,17 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MatButtonModule, MatIconModule, MatInputModule, MatListModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatSidenavModule,
+  MatToolbarModule
+} from '@angular/material';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {ResolverService} from './resolver.service';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   imports: [
@@ -12,6 +21,7 @@ import {ResolverService} from './resolver.service';
     MatButtonModule,
     MatListModule,
     MatInputModule,
+    MatCardModule
   ],
   exports: [
     MatSidenavModule,
@@ -20,6 +30,7 @@ import {ResolverService} from './resolver.service';
     MatButtonModule,
     MatListModule,
     MatInputModule,
+    MatCardModule,
     OverlayModule
   ]
 })
@@ -33,7 +44,8 @@ export class MaterialModule {
     CommonModule
   ],
   exports: [
-    MaterialModule
+    MaterialModule,
+    FlexLayoutModule
   ]
 })
 export class CommonsModule {

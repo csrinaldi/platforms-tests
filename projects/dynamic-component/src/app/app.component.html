@@ -1,4 +1,4 @@
-<div class="demo-sidenav-area">
+<div class="layout">
   <mat-sidenav-container>
 
     <mat-sidenav fxFlex #start opened="false" mode="side" class="mat-elevation-z6" style="width: 350px">
@@ -16,17 +16,23 @@
             <h3 style="margin-left: 20px">Angular Tests</h3>
           </div>
 
-          <div fxFlex="" fxLayout="row" fxLayoutAlign="start center" class="search-container" #searchContainer>
-            <mat-icon>search</mat-icon>
-            <input fxFlex="" placeholder="Search Form">
-            <button mat-icon-button="" (click)="openForm(searchContainer)">
-              <mat-icon>keyboard_arrow_down</mat-icon>
-            </button>
-          </div>
+          <ng-container
+            *ngIf="hasSearch; then showSearchBox;">
+          </ng-container>
 
-<!--          <div fxFlex="720px">-->
-<!--            <template #searchOption></template>-->
-<!--          </div>-->
+          <ng-template #showSearchBox>
+            <div fxFlex="" fxLayout="row" fxLayoutAlign="start center" class="search-container" #searchContainer>
+              <mat-icon>search</mat-icon>
+              <input fxFlex="" placeholder="Search Form">
+              <button mat-icon-button="" (click)="openForm(searchContainer)">
+                <mat-icon>keyboard_arrow_down</mat-icon>
+              </button>
+            </div>
+          </ng-template>
+
+          <!--          <div fxFlex="720px">-->
+          <!--            <template #searchOption></template>-->
+          <!--          </div>-->
           <span fxFlex=""></span>
 
           <h3></h3>
@@ -43,7 +49,7 @@
 
       </mat-toolbar>
 
-      <div class="main-container">
+      <div class="main-container" fxFlex="" fxFlexFill>
         <router-outlet></router-outlet>
       </div>
     </mat-sidenav-content>

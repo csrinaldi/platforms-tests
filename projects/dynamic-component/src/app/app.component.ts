@@ -1,9 +1,10 @@
-import {Component, ComponentFactoryResolver, ComponentRef, Injector, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, ComponentFactoryResolver, ComponentRef, Injector, OnInit, Type, ViewChild, ViewContainerRef} from '@angular/core';
 import {ToolbarOptions} from './commons/toolbar.options';
 import {ActivatedRoute, NavigationEnd, Route, Router} from '@angular/router';
 import {filter, map} from 'rxjs/operators';
 import {ConnectionPositionPair, Overlay, OverlayConfig, PositionStrategy} from '@angular/cdk/overlay';
 import {ResolverService} from './commons/resolver.service';
+import {ComponentPortal} from '@angular/cdk/portal';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,8 @@ export class AppComponent implements OnInit {
   private remoteInjector: Injector;
 
   private searchFormComponentRef: ComponentRef<any>;
+  private searchFormComponent: Type<any>;
+  hasSearch = false;
 
   constructor(
     public viewContainerRef: ViewContainerRef,
@@ -30,10 +33,10 @@ export class AppComponent implements OnInit {
     private resolverService: ResolverService
   ) {
 
-    console.log("AppComponent" + this.resolverService.n);
+    console.log('AppComponent' + this.resolverService.n);
 
     this.resolverService.contextReceived$.subscribe(data => {
-      console.log("HOLA");
+      console.log('HOLA');
       this.remoteComponentFactoryResolver = data.resolver;
       this.remoteInjector = data.injector;
     });
@@ -81,6 +84,12 @@ export class AppComponent implements OnInit {
         return route;
       })
     ).subscribe((event: ActivatedRoute) => {
+      if (event.snapshot.data.search !== undefined && event.snapshot.data.search.component !== undefined) {
+        this.searchFormComponent = event.snapshot.data.search.component;
+        this.hasSearch = true;
+      } else {
+        this.hasSearch = false;
+      }
     });
   }
 
@@ -96,8 +105,9 @@ export class AppComponent implements OnInit {
 
 // Create Dynamic Form
   openForm(container: HTMLDivElement) {
-    const childComponent = this.remoteComponentFactoryResolver.resolveComponentFactory(event.snapshot.data.search.component);
-    this.searchFormComponentRef = this.viewContainerRef.createComponent(childComponent, 0, this.remoteInjector);
     const overlayRef = this.overlay.create(this.getOverlayConfig(container, container.clientWidth, container.clientHeight));
+    overlayRef.attach(
+      new ComponentPortal(this.searchFormComponent, this.viewContainerRef, this.remoteInjector, this.remoteComponentFactoryResolver)
+    );
   }
 }
