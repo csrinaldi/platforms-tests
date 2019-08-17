@@ -1,23 +1,22 @@
 import {OverlayRef} from '@angular/cdk/overlay';
-import {Subject} from 'rxjs';
-import {TemplateRef, Type} from '@angular/core';
 
-// export type CloseEvent<T> = {
-//   type: 'backdropClick' | 'close';
-//   data: T;
-// }
+export class CommonOverlayRef<T> {
 
-export type PopoverContent = TemplateRef<any> | Type<any> | string;
+  // tslint:disable-next-line:variable-name
+  private _instance: T;
 
-export class CustomOverlayref {
+  constructor(private overlayRef: OverlayRef) { }
 
-  // private afterClosed = new Subject()<CloseEvent<T>>();
-  // afterClosed$ = this.afterClosed.asObservable();
-
-  constructor(private overlayRef: OverlayRef, private component: any) {
+  close(): void {
+    this.overlayRef.dispose();
   }
 
 
+  get instance() {
+    return this._instance;
+  }
 
-
+  set instance(value) {
+    this._instance = value;
+  }
 }

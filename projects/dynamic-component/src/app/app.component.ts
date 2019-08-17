@@ -1,10 +1,10 @@
 import {Component, ComponentFactoryResolver, ComponentRef, Injector, OnInit, Type, ViewChild, ViewContainerRef} from '@angular/core';
-import {ToolbarOptions} from './commons/toolbar.options';
-import {ActivatedRoute, NavigationEnd, Route, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {filter, map} from 'rxjs/operators';
 import {ConnectionPositionPair, Overlay, OverlayConfig, PositionStrategy} from '@angular/cdk/overlay';
 import {ResolverService} from './commons/resolver.service';
 import {ComponentPortal} from '@angular/cdk/portal';
+import {GenericSearchComponent} from './commons/generic-search-component';
 
 @Component({
   selector: 'app-root',
@@ -36,7 +36,6 @@ export class AppComponent implements OnInit {
     console.log('AppComponent' + this.resolverService.n);
 
     this.resolverService.contextReceived$.subscribe(data => {
-      console.log('HOLA');
       this.remoteComponentFactoryResolver = data.resolver;
       this.remoteInjector = data.injector;
     });
@@ -96,7 +95,6 @@ export class AppComponent implements OnInit {
   private getOverlayConfig(origin, width, height): OverlayConfig {
     return new OverlayConfig({
       width,
-      height,
       hasBackdrop: false,
       positionStrategy: this.getOverlayPosition(origin),
       scrollStrategy: this.overlay.scrollStrategies.reposition()
@@ -105,9 +103,18 @@ export class AppComponent implements OnInit {
 
 // Create Dynamic Form
   openForm(container: HTMLDivElement) {
+
+    const componentPortal: ComponentPortal<any> = new ComponentPortal(this.searchFormComponent, this.viewContainerRef, this.remoteInjector, this.remoteComponentFactoryResolver);
     const overlayRef = this.overlay.create(this.getOverlayConfig(container, container.clientWidth, container.clientHeight));
-    overlayRef.attach(
-      new ComponentPortal(this.searchFormComponent, this.viewContainerRef, this.remoteInjector, this.remoteComponentFactoryResolver)
-    );
+    const componentRef: ComponentRef<any> = overlayRef.attach(componentPortal);
+    const instance: GenericSearchComponent<any, any> = componentRef.instance as GenericSearchComponent<any, any>;
+    instance.afterSearched$.subscribe((data) => {
+      console.log(data);
+      overlayRef.detach();
+    });
+
+    instance.afterClosed$.subscribe(value => {
+      overlayRef.detach();
+    });
   }
 }
