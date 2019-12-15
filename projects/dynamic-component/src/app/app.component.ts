@@ -13,7 +13,7 @@ import {GenericSearchComponent} from './commons/generic-search-component';
 })
 export class AppComponent implements OnInit {
 
-  @ViewChild('searchChildOption', {read: ViewContainerRef, static: false})
+  @ViewChild('searchChildOption', { read: ViewContainerRef })
   private searchFormContainer: ViewContainerRef;
 
   private remoteComponentFactoryResolver: ComponentFactoryResolver;

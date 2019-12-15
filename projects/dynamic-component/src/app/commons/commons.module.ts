@@ -49,7 +49,7 @@ export class MaterialModule {
   ]
 })
 export class CommonsModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<CommonsModule> {
     return {
       ngModule: CommonsModule,
       providers: [
