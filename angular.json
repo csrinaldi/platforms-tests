@@ -22,7 +22,7 @@
             "main": "projects/dynamic-component/src/main.ts",
             "polyfills": "projects/dynamic-component/src/polyfills.ts",
             "tsConfig": "projects/dynamic-component/tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "projects/dynamic-component/src/favicon.ico",
               "projects/dynamic-component/src/assets"
@@ -46,7 +46,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
