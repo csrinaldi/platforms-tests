@@ -32,7 +32,7 @@ export class CourseSearchFormComponent extends GenericSearchComponent<CloseData,
 
   }
 
-  onSubmit() {
+  onSubmit(value: any) {
     const searchData = new SearchData();
     searchData.name = this.formGroup.get('name').value;
     this.afterSearched.next(searchData);
