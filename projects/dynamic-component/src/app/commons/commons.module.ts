@@ -1,14 +1,12 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatSidenavModule,
-  MatToolbarModule
-} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {ResolverService} from './resolver.service';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -49,7 +47,7 @@ export class MaterialModule {
   ]
 })
 export class CommonsModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<CommonsModule> {
     return {
       ngModule: CommonsModule,
       providers: [
