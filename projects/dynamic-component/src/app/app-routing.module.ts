@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {ListCoursesComponent} from './courses/components/list-courses/list-courses.component';
 import {HomeComponent} from './home/home.component';
 
 
@@ -15,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'courses',
-    loadChildren: () => import('./courses/course.module').then(m => m.CourseModule)
+    loadChildren: () => import('../../../commons-lib/course.module').then(m => m.CourseModule)
   },
 ];
 

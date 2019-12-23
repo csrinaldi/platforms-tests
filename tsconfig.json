@@ -17,7 +17,18 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "courses-lib": [
+        "dist/courses-lib"
+      ],
+      "commons-lib": [
+        "dist/commons-lib"
+      ],
+      "layout-lib": [
+        "dist/layout-lib"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
