@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import {StoreModule} from "@ngrx/store";
-import {metaReducers, reducers} from "../../../dynamic-component/src/app/reducers";
 import {LayoutComponent, LayoutLibModule} from "layout-lib";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { RootStoreModule } from './root-store/root-store.module';
 
 @NgModule({
   declarations: [
@@ -15,13 +15,14 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     BrowserAnimationsModule,
     LayoutLibModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers,
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true
-      }
-    }),
+    RootStoreModule,
+    // StoreModule.forRoot(reducers, {
+    //   metaReducers,
+    //   runtimeChecks: {
+    //     strictStateImmutability: true,
+    //     strictActionImmutability: true
+    //   }
+    // }),
     // EffectsModule.forRoot([])
   ],
   providers: [],

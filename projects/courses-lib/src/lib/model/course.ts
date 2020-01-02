@@ -1,6 +1,12 @@
 export class Course {
 
-  // tslint:disable-next-line:variable-name
+
+  constructor(name: string, description: string) {
+    this._name = name;
+    this._description = description;
+  }
+
+// tslint:disable-next-line:variable-name
   private _name: string;
 
   // tslint:disable-next-line:variable-name

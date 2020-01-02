@@ -1,5 +1,5 @@
 import {Component, ComponentFactoryResolver, Inject, Injector, OnInit} from '@angular/core';
-import {Course} from '../../domain/course';
+import {Course} from '../../model/course';
 import {ResolverService} from '@logikas/commons-lib';
 
 @Component({

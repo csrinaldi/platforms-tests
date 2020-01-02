@@ -6,6 +6,8 @@ import {CommonsLibModule} from "commons-lib";
 import {ListCoursesComponent} from "./components/list-courses/list-courses.component";
 import {CourseSearchFormComponent} from "./components/course-search-form-component/course-search-form.component";
 import {SCHEDULER_ROUTERS} from "./courses-lib-routing.module";
+import {CoursesService} from "./services/courses.service";
+import {CoursesFakeBackendInterceptor} from "./_helper/courses.fake.backend";
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import {SCHEDULER_ROUTERS} from "./courses-lib-routing.module";
     CommonModule,
     ReactiveFormsModule,
     CommonsLibModule,
+    // StoreModule.forFeature('courses', fromShips.reducer),
+    // EffectsModule.forFeature([ShipsEffects]),
     SCHEDULER_ROUTERS
   ],
   exports: [
@@ -24,7 +28,10 @@ import {SCHEDULER_ROUTERS} from "./courses-lib-routing.module";
   entryComponents: [
     CourseSearchFormComponent
   ],
-  providers: [],
+  providers: [
+    CoursesFakeBackendInterceptor,
+    CoursesService
+  ],
 })
 export class CourseModule {
 }
