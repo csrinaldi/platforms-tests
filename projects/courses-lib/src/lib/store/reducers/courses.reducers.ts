@@ -1,9 +1,10 @@
-import {Course} from "../../model/course";
-import {CoursesActions, CoursesActionTypes} from "../actions/courses.actions";
+import {Course} from '../../model/course';
+import {createReducer, on} from '@ngrx/store';
+import {CourseActions} from '../actions';
 
 export interface State {
   courses: Course[];
-  loadingCourses: boolean
+  loadingCourses: boolean;
 }
 
 const initialState: State = {
@@ -11,23 +12,8 @@ const initialState: State = {
   loadingCourses: false
 };
 
-export function reducer(state = initialState, action: CoursesActions): State {
-  switch (action.type) {
-    case CoursesActionTypes.LoadCoursesRequest:
-      return {
-        ...state,
-
-      }
-
-    default:
-      return state;
-  }
-}
-
-function handleCourses(state: State, action: CoursesActions): State{
-  return {
-    ...state
-    // allShips: action.payload
-  };
-
-}
+export const reducer = createReducer(
+  initialState,
+  on(CourseActions.loadCoursesRequest, (state) => ({...state, loadingCourses: true})),
+  on(CourseActions.loadCoursesRequestSuccess, (state, {courses}) => ({...state, loadingCourses: false, courses}))
+);

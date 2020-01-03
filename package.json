@@ -23,21 +23,18 @@
     "@angular/platform-browser-dynamic": "~9.0.0-rc.6",
     "@angular/router": "~9.0.0-rc.6",
     "@logikas/commons-lib": "file:dist/commons-lib",
-    "@logikas/courses-lib": "file:dist/courses-lib",
     "@ngrx/effects": "^8.6.0",
     "@ngrx/entity": "^8.6.0",
+    "@ngrx/router-store": "^8.6.0",
     "@ngrx/store": "^8.6.0",
     "@ngrx/store-devtools": "^8.6.0",
+    "courses-lib": "file:dist/courses-lib",
     "layout-lib": "file:dist/layout-lib",
     "rxjs": "~6.5.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
-  "optionalDependencies": {
-    "commons-lib": "file:dist/commons-lib",
-    "layout-lib": "file:dist/layout-lib",
-    "courses-lib": "file:dist/courses-lib"
-  },
+  "optionalDependencies": {},
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.900.0-rc.6",
     "@angular-devkit/build-ng-packagr": "~0.900.0-rc.7",

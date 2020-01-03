@@ -1,5 +1,5 @@
-import {createAction, props} from "@ngrx/store";
-import {Course} from "../../model/course";
+import {createAction, props} from '@ngrx/store';
+import {Course} from '../../model/course';
 
 export enum CoursesActionTypes {
   LoadCoursesRequest = '[Courses] Load Courses Request',
@@ -18,7 +18,8 @@ export const loadCoursesRequest = createAction(
 /**
  * Represent an Request Success of Load a set of courses
  */
-export const LoadCoursesRequestSuccess = createAction(
+export const loadCoursesRequestSuccess = createAction(
   CoursesActionTypes.LoadCoursesRequestSuccess,
-  props<{courses: Course[]}>()
+  props<{ courses: Course[] }>()
 );
+
