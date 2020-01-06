@@ -2,14 +2,15 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
-import {StoreModule} from '@ngrx/store';
+import {createSelector, select, Store, StoreModule} from '@ngrx/store';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {RootStoreModule} from './store/root-store.module';
-import {metaReducers, ROOT_REDUCERS} from './store/reducer';
+import {metaReducers, ROOT_REDUCERS, State} from './store/reducer';
 import {RouterState, StoreRouterConnectingModule} from '@ngrx/router-store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {EffectsModule} from '@ngrx/effects';
-import {LayoutComponent, LayoutLibModule} from 'layout-lib';
+import {LayoutComponent, CoreLibModule} from 'core-lib';
+import {LayoutStore} from "../../../core-lib/src/lib/store/reducers";
+
 
 
 @NgModule({
@@ -17,9 +18,6 @@ import {LayoutComponent, LayoutLibModule} from 'layout-lib';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    LayoutLibModule,
-    AppRoutingModule,
-    RootStoreModule,
 
     /**
      * StoreModule.forRoot is imported once in the root module, accepting a reducer
@@ -28,15 +26,17 @@ import {LayoutComponent, LayoutLibModule} from 'layout-lib';
      * meta-reducer. This returns all providers for an @ngrx/store
      * based application.
      */
-    StoreModule.forRoot(ROOT_REDUCERS, {
-      metaReducers,
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true,
-        strictStateSerializability: true,
-        strictActionSerializability: true,
-      },
-    }),
+    // StoreModule.forRoot(ROOT_REDUCERS, {
+    //   metaReducers,
+    //   runtimeChecks: {
+    //     strictStateImmutability: true,
+    //     strictActionImmutability: true,
+    //     strictStateSerializability: true,
+    //     strictActionSerializability: true,
+    //   },
+    // }),
+
+    StoreModule.forRoot(ROOT_REDUCERS, {metaReducers}),
 
     /**
      * @ngrx/router-store keeps router state up-to-date in the store.
@@ -70,8 +70,25 @@ import {LayoutComponent, LayoutLibModule} from 'layout-lib';
      * See: https://ngrx.io/guide/effects#registering-root-effects
      */
     EffectsModule.forRoot([/*UserEffects, RouterEffects*/]),
+    CoreLibModule,
+    AppRoutingModule,
   ],
   providers: [],
-  bootstrap: [LayoutComponent]
+  bootstrap: [
+    LayoutComponent
+  ]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor(private store: Store<State> ) {
+    console.log("--------------------");
+    console.log(ROOT_REDUCERS);
+    console.log("--------------------");
+
+    this.store.pipe(select(LayoutStore.selectShowSidenav)).subscribe(value => {
+      console.log(value);
+    });
+
+
+  }
+}

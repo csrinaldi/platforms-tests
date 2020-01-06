@@ -28,8 +28,8 @@
     "@ngrx/router-store": "^8.6.0",
     "@ngrx/store": "^8.6.0",
     "@ngrx/store-devtools": "^8.6.0",
+    "core-lib": "file:dist/core-lib",
     "courses-lib": "file:dist/courses-lib",
-    "layout-lib": "file:dist/layout-lib",
     "rxjs": "~6.5.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

@@ -25,8 +25,8 @@
       "commons-lib": [
         "dist/commons-lib"
       ],
-      "layout-lib": [
-        "dist/layout-lib"
+      "core-lib": [
+        "dist/core-lib"
       ]
     }
   },
