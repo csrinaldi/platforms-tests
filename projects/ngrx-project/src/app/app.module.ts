@@ -2,15 +2,14 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
-import {createSelector, select, Store, StoreModule} from '@ngrx/store';
+import {select, Store, StoreModule} from '@ngrx/store';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {metaReducers, ROOT_REDUCERS, State} from './store/reducer';
+import {metaReducers, ROOT_REDUCERS, selectHome, State} from './store/reducer';
 import {RouterState, StoreRouterConnectingModule} from '@ngrx/router-store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {EffectsModule} from '@ngrx/effects';
-import {LayoutComponent, CoreLibModule} from 'core-lib';
-import {LayoutStore} from "../../../core-lib/src/lib/store/reducers";
-
+import {CoreLibModule, LayoutComponent} from 'core-lib';
+import * as fromRoot from '../app/store/reducer/test.reducer';
 
 
 @NgModule({
@@ -85,10 +84,10 @@ export class AppModule {
     console.log(ROOT_REDUCERS);
     console.log("--------------------");
 
-    this.store.pipe(select(LayoutStore.selectShowSidenav)).subscribe(value => {
-      console.log(value);
-    });
+    this.store.pipe(select(selectHome)).subscribe(value => {
+      console.log("HOLA COMO ANDAS " + value);
+    })
 
-
+    this.store.dispatch(fromRoot.homeScore());
   }
 }

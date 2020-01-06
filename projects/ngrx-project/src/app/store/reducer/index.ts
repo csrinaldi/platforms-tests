@@ -1,15 +1,9 @@
-import {
-  Action,
-  ActionReducer,
-  ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
-  MetaReducer,
-} from '@ngrx/store';
+import {Action, ActionReducer, ActionReducerMap, createSelector, MetaReducer,} from '@ngrx/store';
 import {environment} from '../../../environments/environment';
 import * as fromRouter from '@ngrx/router-store';
 import {InjectionToken} from '@angular/core';
-import {LayoutStore} from "core-lib";
+
+import * as fromRoot from './test.reducer';
 
 /**
  * Every reducer module's default export is the reducer function itself. In
@@ -23,7 +17,8 @@ import {LayoutStore} from "core-lib";
  * our top level state interface is just a map of keys to inner state types.
  */
 export interface State {
-  router: fromRouter.RouterReducerState<any>;
+  router: fromRouter.RouterReducerState<any>,
+  test: fromRoot.State
 }
 
 /**
@@ -34,6 +29,7 @@ export interface State {
 export const ROOT_REDUCERS = new InjectionToken<ActionReducerMap<State, Action>>('Root reducers token', {
   factory: () => ({
     router: fromRouter.routerReducer,
+    test: fromRoot.reducer
   }),
 });
 
@@ -59,10 +55,11 @@ export const metaReducers: MetaReducer<State>[] = !environment.production
   ? [logger]
   : [];
 
+export const selectFeature = (state: State) => state.test
 
-
-
-export const showSidenav = createSelector(
-  LayoutStore.state,
-  (state: LayoutStore.State) => { state.showSidenav})
+export const selectHome = createSelector(
+  selectFeature,
+  (state: fromRoot.State) => state.home
 );
+
+
