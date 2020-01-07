@@ -3,11 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
-  {
-    path: 'courses',
-    loadChildren: () =>
-      import('courses-lib').then(m => m.CourseModule)
-  }
+  // {
+  //   path: 'courses',
+  //   loadChildren: () =>
+  //     import('courses-lib').then(m => m.CourseModule)
+  // }
 ];
 
 @NgModule({

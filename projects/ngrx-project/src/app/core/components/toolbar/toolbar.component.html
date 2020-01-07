@@ -1,0 +1,41 @@
+  <mat-toolbar color="#ffffff" class="mat-elevation-z1">
+    <mat-toolbar-row class="child-options">
+
+      <div style="padding-right: 32px" fxLayout="row" fxLayoutAlign="start center">
+        <button mat-icon-button="" (click)="toggle.emit()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <img src="{{logo$ | async}}">
+        <h3 style="margin-left: 20px">{{title}}</h3>
+      </div>
+
+<!--      <ng-container-->
+<!--        *ngIf="hasSearch; then showSearchBox;">-->
+<!--      </ng-container>-->
+
+<!--      <ng-template #showSearchBox>-->
+<!--        <div fxFlex="" fxLayout="row" fxLayoutAlign="start center" class="search-container" #searchContainer>-->
+<!--          <mat-icon>search</mat-icon>-->
+<!--          <input fxFlex="" placeholder="Search Form">-->
+<!--          <button mat-icon-button="" (click)="openForm(searchContainer)">-->
+<!--            <mat-icon>keyboard_arrow_down</mat-icon>-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </ng-template>-->
+
+      <span fxFlex=""></span>
+
+      <h3></h3>
+      <button mat-icon-button="">
+        <mat-icon class="mat-36">{{avatar$ | async}}</mat-icon>
+      </button>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row class="child-options">
+      <div fxFlex="row" fxLayoutAlign="end center">
+        <template #childOptions></template>
+      </div>
+    </mat-toolbar-row>
+
+  </mat-toolbar>
+
