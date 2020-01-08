@@ -1,17 +1,9 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {ModuleWithProviders} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
 
 const routes: Routes = [
-  // {
-  //   path: 'courses',
-  //   loadChildren: () =>
-  //     import('courses-lib').then(m => m.CourseModule)
-  // }
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
+export const APP_ROUTERS: ModuleWithProviders = RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload', useHash: true });

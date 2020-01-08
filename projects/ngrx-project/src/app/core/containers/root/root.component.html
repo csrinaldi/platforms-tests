@@ -1,4 +1,8 @@
 <s-layout>
-    <s-toolbar toolbar [title]="value$ | async" (toggle)="changeState()"></s-toolbar>
-
+    <s-toolbar toolbar [title]="value$ | async" (toggle)="changeState()">
+      <button mat-button (click)="onHome()">Home</button>
+    </s-toolbar>
+    <div content class="content">
+      <router-outlet ></router-outlet>
+    </div>
 </s-layout>

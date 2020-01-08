@@ -1,22 +1,27 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
-import {AppRoutingModule} from './app-routing.module';
+import {APP_ROUTERS} from './app-routing.module';
 import {select, Store, StoreModule} from '@ngrx/store';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {metaReducers, ROOT_REDUCERS, selectHome, State} from './store/reducer';
 import {RouterState, StoreRouterConnectingModule} from '@ngrx/router-store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {EffectsModule} from '@ngrx/effects';
-import {CoreLibModule, LayoutComponent} from 'core-lib';
-import * as fromRoot from '../app/store/reducer/test.reducer';
 
+import * as fromRoot from '../app/store/reducer/test.reducer';
+import {CoreModule} from "./core/core.module";
+import {RootComponent} from "./core/containers/root/root.component";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    CoreModule,
+    APP_ROUTERS,
 
     /**
      * StoreModule.forRoot is imported once in the root module, accepting a reducer
@@ -68,13 +73,11 @@ import * as fromRoot from '../app/store/reducer/test.reducer';
      *
      * See: https://ngrx.io/guide/effects#registering-root-effects
      */
-    EffectsModule.forRoot([/*UserEffects, RouterEffects*/]),
-    CoreLibModule,
-    AppRoutingModule,
+    EffectsModule.forRoot([/*UserEffects, RouterEffects*/])
   ],
   providers: [],
   bootstrap: [
-    LayoutComponent
+    RootComponent
   ]
 })
 export class AppModule {

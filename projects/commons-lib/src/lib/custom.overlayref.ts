@@ -2,7 +2,7 @@ import {OverlayRef} from '@angular/cdk/overlay';
 
 export class CommonOverlayRef<T> {
 
-  // tslint:disable-next-line:variable-name
+  // tslint:disable-next-line:variable-firstName
   private _instance: T;
 
   constructor(private overlayRef: OverlayRef) { }

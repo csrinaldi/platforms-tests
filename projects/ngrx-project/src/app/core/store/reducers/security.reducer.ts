@@ -7,19 +7,23 @@ export const securityFeatureKey = 'security';
 export interface SecurityState {
   principal: Principal,
   loggedIn: boolean,
-  loading: boolean
+  loading: boolean,
+  error: string
 }
 
 const initialState: SecurityState = {
   principal: undefined,
   loggedIn: false,
-  loading: false
+  loading: false,
+  error: ""
 };
 
 export const securityReducer = createReducer(
   initialState,
+  on(SecurityActions.loginRequest, (state: SecurityState) => (state)),
   on(SecurityActions.login, (state: SecurityState) => ({...state, loading: true })),
   on(SecurityActions.loginSuccess, (state: SecurityState, {principal}) => ({...state, loading: false, principal: principal, loggedIn: true })),
+  on(SecurityActions.loginFailure, (state: SecurityState, {error}) => ({...state, loading: false, loggedIn: false, error: error })),
   on(SecurityActions.logout, (state: SecurityState) => ({...state, loading: true })),
   on(SecurityActions.logoutSuccess, (state: SecurityState) => ({...state, loading: false, principal: undefined, loggedIn: false }))
 );

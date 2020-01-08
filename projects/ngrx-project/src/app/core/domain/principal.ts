@@ -1,8 +1,8 @@
+import {User} from "./user";
+
 export class Principal{
 
-  username: string;
-  avatar: string;
-  name: string;
-  lastName: string;
+  user: User;
+  token: string
 
 }

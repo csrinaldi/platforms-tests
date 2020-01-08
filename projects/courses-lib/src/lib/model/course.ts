@@ -6,10 +6,10 @@ export class Course {
     this._description = description;
   }
 
-// tslint:disable-next-line:variable-name
+// tslint:disable-next-line:variable-firstName
   private _name: string;
 
-  // tslint:disable-next-line:variable-name
+  // tslint:disable-next-line:variable-firstName
   private _description: string;
 
   get name(): string {
