@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Store} from "@ngrx/store";
+import {select, Store} from "@ngrx/store";
 import * as fromCode from '../../store'
 import {EmailPasswordCredentials} from "../../domain/emailPasswordCredentials";
+import {Observable} from "rxjs";
+import * as fromCore from "../../store/reducers";
 
 @Component({
   selector: 's-home',
@@ -10,10 +12,14 @@ import {EmailPasswordCredentials} from "../../domain/emailPasswordCredentials";
 })
 export class LoginComponent implements OnInit {
 
+  errors$: Observable<string>;
+  hasErrors$: Observable<boolean>;
+
   constructor(private store: Store<fromCode.CoreState>) { }
 
   ngOnInit() {
-
+    this.errors$ = this.store.pipe(select(fromCore.errors));
+    this.hasErrors$ = this.store.pipe(select(fromCore.hasErrors));
   }
 
   onLogin() {

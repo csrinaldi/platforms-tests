@@ -1,1 +1,3 @@
 <button mat-button (click)="onLogin()">Login</button>
+
+<h2 *ngIf="hasErrors$ | async">Error: {{errors$ | async | json}}</h2>

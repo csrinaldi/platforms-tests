@@ -55,13 +55,18 @@ export class AuthGuard implements CanActivate {
    * on to the next candidate route. In this case, it will move on
    * to the 404 page.
    */
-  canActivate(route: ActivatedRouteSnapshot): boolean {
-    if ( this.store.select(fromCore.loggedIn) ){
-      return true;
-    } else {
-      this.store.dispatch(fromCore.loginRequest);
-      return false;
-    }
+  canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
+      return this.store.pipe(
+        select(fromCore.loggedIn),
+        map(authed => {
+          if (!authed) {
+            this.store.dispatch(fromCore.loginRequest());
+            return false;
+          }
+          return true;
+        }),
+        take(1)
+      );
   }
 
 }

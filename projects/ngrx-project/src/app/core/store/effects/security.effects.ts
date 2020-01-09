@@ -2,8 +2,9 @@ import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {Injectable} from "@angular/core";
 import {AuthService} from "../../services/AuthService";
 import * as fromCore from '../actions';
-import {map, switchMap, tap} from "rxjs/operators";
+import {catchError, map, switchMap, tap} from "rxjs/operators";
 import {Router} from "@angular/router";
+import {from, of} from "rxjs";
 
 @Injectable()
 export class SecurityEffects {
@@ -18,10 +19,14 @@ export class SecurityEffects {
     () => this.actions$
       .pipe(
         ofType(fromCore.login),
-        switchMap((value) =>
-          this.authService.login(value.credentials).pipe(
-            map(value1 => ( fromCore.loginSuccess({principal: value1}))),
-          )
+        switchMap((value) => {
+            console.log("En el Efecto!!!! ", value);
+            return this.authService.login(value.credentials).pipe(
+              map(value1 => (fromCore.loginSuccess({principal: value1}))),
+              catchError((err, caught) =>
+                of(fromCore.loginFailure({error: err})))
+            )
+          }
         )
       )
   );
@@ -31,9 +36,11 @@ export class SecurityEffects {
       .pipe(
         ofType(fromCore.loginRequest),
         tap( () => {
+          console.log("Procesando ......")
           this.router.navigate(['login']);
         })
-      )
+      ),
+    {dispatch: false}
   );
 
 
