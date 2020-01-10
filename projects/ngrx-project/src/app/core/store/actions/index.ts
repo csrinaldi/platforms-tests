@@ -1,2 +1,2 @@
 export * from './layout.actions';
-export * from './security.actions';
+export * from './auth.actions';

@@ -23,7 +23,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
 
+
     const {url, method, headers, body} = request;
+
+    console.log(url);
 
     // array in local storage for registered users
     // let users: any[] = JSON.parse(localStorage.getItem('users')) || [];
@@ -41,6 +44,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       switch (true) {
         case url.endsWith('/api/login') && request.method === 'POST':
           return authenticate();
+        case url.endsWith('/api/logout') && request.method === 'POST':
+          return ok(true)
         default:
           // pass through any requests not handled above
           return next.handle(request);
@@ -80,7 +85,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
 
 
-    //   if (request.url.endsWith('/api/logout') && request.method === 'POST') {
+    //   if (request.url.endsWith('/api/logoutRequest') && request.method === 'POST') {
     //
     //     console.log(request.body);
     //
@@ -89,7 +94,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     //     });
     //
     //     if (filteredUsers.length) {
-    //         // if login details are valid return 200 OK with user details and fake jwt token
+    //         // if loginRequest details are valid return 200 OK with user details and fake jwt token
     //         let user = filteredUsers[0];
     //         return of(new HttpResponse({status: 200, body: {}}));
     //     } else {

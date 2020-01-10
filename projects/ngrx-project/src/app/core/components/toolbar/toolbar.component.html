@@ -30,8 +30,8 @@
       <span fxFlex=""></span>
 
       <h3></h3>
-      <button mat-icon-button="">
-        <mat-icon class="mat-36">{{avatar$ | async}}</mat-icon>
+      <button *ngIf="hasLogout$ | async" mat-icon-button="" (click)="logout()">
+        <mat-icon class="mat-36">exit_to_app</mat-icon>
       </button>
     </mat-toolbar-row>
 

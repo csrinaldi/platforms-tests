@@ -18,7 +18,7 @@ import {Principal} from "../domain/principal";
 })
 export class AuthGuard implements CanActivate {
   constructor(
-    private store: Store<fromCore.SecurityState>,
+    private store: Store<fromCore.AuthState>,
     private authService: AuthService,
     private router: Router) {
 
@@ -60,7 +60,7 @@ export class AuthGuard implements CanActivate {
         select(fromCore.loggedIn),
         map(authed => {
           if (!authed) {
-            this.store.dispatch(fromCore.loginRequest());
+            this.store.dispatch(fromCore.loginViewRequest());
             return false;
           }
           return true;

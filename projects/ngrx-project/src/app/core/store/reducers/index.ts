@@ -1,2 +1,2 @@
 export * from './layout.reducer';
-export * from './security.reducer';
+export * from './auth.reducer';

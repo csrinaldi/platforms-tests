@@ -6,6 +6,7 @@ export const layoutFeatureKey = 'layout';
 
 export interface CoreState {
   showSidenav: boolean;
+  showToolbar: boolean;
   title: string,
   avatar: string,
   logo: string
@@ -13,6 +14,7 @@ export interface CoreState {
 
 const initialState: CoreState = {
   showSidenav: true,
+  showToolbar: true,
   title: "Home",
   avatar: "",
   logo: ""
@@ -25,7 +27,9 @@ export const layoutReducer = createReducer(
   on(LayoutActions.closeSidenav, state => ({ showSidenav: false })),
   on(LayoutActions.openSidenav, state => ({ showSidenav: true })),
   on(LayoutActions.toggleSidenav, (state: CoreState) => ({ ...state, showSidenav: !state.showSidenav})),
-  on(LayoutActions.setTitleAction, (state: CoreState, {title}) => ({ ...state, title: title }))
+  on(LayoutActions.setTitle, (state: CoreState, {title}) => ({ ...state, title: title })),
+  on(LayoutActions.showToolbar, (state: CoreState) => ({ ...state, showToolbar: true})),
+  on(LayoutActions.hideToolbar, (state: CoreState) => ({ ...state, showToolbar: false})),
 );
 
 export const layoutFeature = createFeatureSelector<CoreState>('layout');
@@ -38,5 +42,10 @@ export const showSidenav = createSelector(
 export const getTitle = createSelector(
   layoutFeature,
   (s1 => s1.title)
+);
+
+export const showToolbar = createSelector(
+  layoutFeature,
+  (s1 => s1.showToolbar)
 );
 

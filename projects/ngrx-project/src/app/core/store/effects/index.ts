@@ -1,1 +1,1 @@
-export * from './security.effects';
+export * from './auth.effects';

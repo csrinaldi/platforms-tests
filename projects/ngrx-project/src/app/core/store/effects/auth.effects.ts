@@ -2,12 +2,12 @@ import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {Injectable} from "@angular/core";
 import {AuthService} from "../../services/AuthService";
 import * as fromCore from '../actions';
-import {catchError, map, switchMap, tap} from "rxjs/operators";
+import {catchError, map, mapTo, switchMap, tap} from "rxjs/operators";
 import {Router} from "@angular/router";
-import {from, of} from "rxjs";
+import {of} from "rxjs";
 
 @Injectable()
-export class SecurityEffects {
+export class AuthEffects {
 
   constructor(
     private actions$: Actions,
@@ -15,10 +15,10 @@ export class SecurityEffects {
     private router: Router
   ) {}
 
-  login$ = createEffect(
+  loginRequest$ = createEffect(
     () => this.actions$
       .pipe(
-        ofType(fromCore.login),
+        ofType(fromCore.loginRequest),
         switchMap((value) => {
             console.log("En el Efecto!!!! ", value);
             return this.authService.login(value.credentials).pipe(
@@ -31,10 +31,33 @@ export class SecurityEffects {
       )
   );
 
-  loginRequest$ = createEffect(
+  logoutRequest$ = createEffect(
     () => this.actions$
       .pipe(
-        ofType(fromCore.loginRequest),
+        ofType(fromCore.logoutRequest),
+        switchMap((value) => {
+            return this.authService.logout().pipe(
+              map(value1 => (fromCore.logoutSuccess())),
+              catchError((err, caught) =>
+                of(fromCore.logoutFailure({error: err})))
+            )
+          }
+        )
+      )
+  );
+
+  logoutSuccess$ = createEffect(
+    () => this.actions$
+      .pipe(
+        ofType(fromCore.logoutSuccess),
+        mapTo(fromCore.loginViewRequest())
+      )
+  );
+
+  loginViewRequest$ = createEffect(
+    () => this.actions$
+      .pipe(
+        ofType(fromCore.loginViewRequest),
         tap( () => {
           console.log("Procesando ......")
           this.router.navigate(['login']);

@@ -5,6 +5,7 @@ import {select, Store} from "@ngrx/store";
 import {CoreState, layoutFeature} from "../../store/reducers";
 import {toggleSidenav} from "../../store/actions/layout.actions";
 import {Router} from "@angular/router";
+import {routerRequestAction} from "@ngrx/router-store";
 
 @Component({
   selector: 's-root',
@@ -14,11 +15,20 @@ import {Router} from "@angular/router";
 export class RootComponent implements OnInit {
 
   value$: Observable<string>;
+  showToolbar$: Observable<boolean>;
 
   constructor(private store: Store<CoreState>, private router: Router) { }
 
   ngOnInit() {
     this.value$ = this.store.pipe(select(fromCore.getTitle));
+    this.showToolbar$ = this.store.pipe(select(fromCore.showToolbar));
+
+    selectRouter
+    this.store.pipe(selectRouter).subscribe(value => {
+
+    })
+
+
   }
 
   changeState() {

@@ -1,3 +1,5 @@
 <button mat-button (click)="onLogin()">Login</button>
 
-<h2 *ngIf="hasErrors$ | async">Error: {{errors$ | async | json}}</h2>
+<mat-spinner *ngIf="loading$ | async"></mat-spinner>
+
+<h2 *ngIf="(hasErrors$ | async) && (loading$ | async)">Error: {{errors$ | async | json}}</h2>

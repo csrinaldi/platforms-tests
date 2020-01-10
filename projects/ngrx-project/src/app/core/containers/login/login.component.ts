@@ -12,20 +12,22 @@ import * as fromCore from "../../store/reducers";
 })
 export class LoginComponent implements OnInit {
 
-  errors$: Observable<string>;
+  errors$: Observable<Error>;
   hasErrors$: Observable<boolean>;
+  loading$: Observable<boolean>;
 
   constructor(private store: Store<fromCode.CoreState>) { }
 
   ngOnInit() {
     this.errors$ = this.store.pipe(select(fromCore.errors));
     this.hasErrors$ = this.store.pipe(select(fromCore.hasErrors));
+    this.loading$ = this.store.pipe(select(fromCore.loading));
   }
 
   onLogin() {
     const credentials = new EmailPasswordCredentials();
     credentials.username = 'csrinaldi';
-    credentials.password = '123123123';
-    this.store.dispatch(fromCode.login({credentials}))
+    credentials.password = '1q2w3e4r';
+    this.store.dispatch(fromCode.loginRequest({credentials}))
   }
 }

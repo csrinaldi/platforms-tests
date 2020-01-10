@@ -1,5 +1,5 @@
 <s-layout>
-    <s-toolbar toolbar [title]="value$ | async" (toggle)="changeState()">
+    <s-toolbar *ngIf="showToolbar$ | async" toolbar [title]="value$ | async" (toggle)="changeState()">
       <button mat-button (click)="onHome()">Home</button>
     </s-toolbar>
     <div content class="content">

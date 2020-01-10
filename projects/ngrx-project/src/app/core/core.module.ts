@@ -12,12 +12,13 @@ import * as forCore from './store/reducers';
 import {fakeBackendProvider} from "./helpers";
 import {AuthService} from "./services/AuthService";
 import {EffectsModule} from "@ngrx/effects";
-import {SecurityEffects} from "./store/effects/security.effects";
+import {AuthEffects} from "./store/effects/auth.effects";
 import {HomeComponent} from "./containers/home/home.component";
 import {AuthGuard} from "./services/authGuard";
 import {HttpClientModule} from "@angular/common/http";
 import {NoPageFoundComponent} from "./components/no-page-found/no-page-found.component";
 import {LoginComponent} from "./containers/login/login.component";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -26,9 +27,10 @@ import {LoginComponent} from "./containers/login/login.component";
     CommonModule,
     HttpClientModule,
     CommonsLibModule,
+    MatProgressSpinnerModule,
     StoreModule.forFeature(forCore.layoutFeatureKey, forCore.layoutReducer ),
-    StoreModule.forFeature(forCore.securityFeatureKey, forCore.securityReducer ),
-    EffectsModule.forFeature([SecurityEffects]),
+    StoreModule.forFeature(forCore.securityFeatureKey, forCore.authReducer ),
+    EffectsModule.forFeature([AuthEffects]),
     CORE_ROUTERS
   ],
   exports: [
