@@ -19,6 +19,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {NoPageFoundComponent} from "./components/no-page-found/no-page-found.component";
 import {LoginComponent} from "./containers/login/login.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {LayoutEffects} from "./store/effects";
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     MatProgressSpinnerModule,
     StoreModule.forFeature(forCore.layoutFeatureKey, forCore.layoutReducer ),
     StoreModule.forFeature(forCore.securityFeatureKey, forCore.authReducer ),
-    EffectsModule.forFeature([AuthEffects]),
+    EffectsModule.forFeature([AuthEffects, LayoutEffects]),
     CORE_ROUTERS
   ],
   exports: [

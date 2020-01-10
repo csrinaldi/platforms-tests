@@ -23,11 +23,6 @@ export class RootComponent implements OnInit {
     this.value$ = this.store.pipe(select(fromCore.getTitle));
     this.showToolbar$ = this.store.pipe(select(fromCore.showToolbar));
 
-    selectRouter
-    this.store.pipe(selectRouter).subscribe(value => {
-
-    })
-
 
   }
 
