@@ -21,9 +21,7 @@ export class RootComponent implements OnInit {
 
   ngOnInit() {
     this.value$ = this.store.pipe(select(fromCore.getTitle));
-    this.showToolbar$ = this.store.pipe(select(fromCore.showToolbar));
-
-
+    this.showToolbar$ = this.store.pipe(select(fromCore.isShowToolbar));
   }
 
   changeState() {

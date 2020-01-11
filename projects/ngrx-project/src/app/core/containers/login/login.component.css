@@ -1,0 +1,73 @@
+:host {
+  height: 100%;
+}
+
+:host /deep/ .container{
+  background-image: url("/assets/backgound_login.jpg");
+  background-size: cover;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+}
+
+:host mat-progress-bar{
+  width: 450px;
+}
+
+:host .lh-login{
+  width: 450px;
+  min-height: 500px;
+  border: 1px solid #dddddd;
+  padding: 50px;
+  padding-top: 10px!important;
+  background: #ffffff;
+}
+
+:host .lh-login h1, :host .lh-login p{
+  font-family: 'Roboto',sans-serif;
+  color: rgba(0,0,0,.87);
+  margin: 0px;
+}
+
+:host .lh-login h1{
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+:host .lh-login p{
+  font-size: 14px;
+  line-height: 20px;
+}
+
+:host mat-form-field{
+  margin-top: 60px;
+}
+
+:host /deep/ .mat-input-placeholder{
+  font-size: 13px;
+}
+
+:host a{
+  /*color: #4285f4;*/
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+  padding: 0px;
+}
+
+:host /deep/ button{
+  height:36px;
+}
+
+:host /deep/ mat-list-item:hover {
+  cursor: pointer;
+}
+
+:host /deep/ .header{}
+
+:host /deep/ .header img{
+  width: 36px;
+  height: 36px;
+}

@@ -44,7 +44,7 @@ export const getTitle = createSelector(
   (s1 => s1.title)
 );
 
-export const showToolbar = createSelector(
+export const isShowToolbar = createSelector(
   layoutFeature,
   (s1 => s1.showToolbar)
 );

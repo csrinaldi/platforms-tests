@@ -20,15 +20,24 @@ import {NoPageFoundComponent} from "./components/no-page-found/no-page-found.com
 import {LoginComponent} from "./containers/login/login.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {LayoutEffects} from "./store/effects";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {ReactiveFormsModule} from "@angular/forms";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 @NgModule({
   declarations: [RootComponent, LayoutComponent, SidenavComponent, ToolbarComponent, HomeComponent, NoPageFoundComponent, LoginComponent],
   imports: [
     CommonModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     CommonsLibModule,
+    ReactiveFormsModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatFormFieldModule,
+
     StoreModule.forFeature(forCore.layoutFeatureKey, forCore.layoutReducer ),
     StoreModule.forFeature(forCore.securityFeatureKey, forCore.authReducer ),
     EffectsModule.forFeature([AuthEffects, LayoutEffects]),
