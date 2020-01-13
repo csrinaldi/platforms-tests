@@ -1,15 +1,15 @@
 import {createFeatureSelector, createReducer, createSelector, on} from '@ngrx/store';
 import * as SecurityActions from '../actions/auth.actions';
-import {Principal} from "../../domain/principal";
+import {Principal} from '../../domain/principal';
 
 export const securityFeatureKey = 'security';
 
 export interface AuthState {
-  principal: Principal,
-  loggedIn: boolean,
-  loading: boolean,
-  hasError: boolean,
-  error: Error
+  principal: Principal;
+  loggedIn: boolean;
+  loading: boolean;
+  hasError: boolean;
+  error: Error;
 }
 
 const initialState: AuthState = {

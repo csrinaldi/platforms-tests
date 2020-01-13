@@ -1,10 +1,10 @@
-import {Actions, createEffect, ofType} from "@ngrx/effects";
-import {Injectable} from "@angular/core";
-import {AuthService} from "../../services/AuthService";
+import {Actions, createEffect, ofType} from '@ngrx/effects';
+import {Injectable} from '@angular/core';
+import {AuthService} from '../../services/AuthService';
 import * as fromCore from '../actions';
-import {catchError, map, mapTo, switchMap, tap} from "rxjs/operators";
-import {Router} from "@angular/router";
-import {of} from "rxjs";
+import {catchError, map, mapTo, switchMap, tap} from 'rxjs/operators';
+import {Router} from '@angular/router';
+import {of} from 'rxjs';
 
 @Injectable()
 export class AuthEffects {
@@ -20,12 +20,12 @@ export class AuthEffects {
       .pipe(
         ofType(fromCore.loginRequest),
         switchMap((value) => {
-            console.log("En el Efecto!!!! ", value);
+            console.log('En el Efecto!!!! ', value);
             return this.authService.login(value.credentials).pipe(
               map(value1 => (fromCore.loginSuccess({principal: value1}))),
               catchError((err, caught) =>
                 of(fromCore.loginFailure({error: err})))
-            )
+            );
           }
         )
       )
@@ -40,7 +40,7 @@ export class AuthEffects {
               map(value1 => (fromCore.logoutSuccess())),
               catchError((err, caught) =>
                 of(fromCore.logoutFailure({error: err})))
-            )
+            );
           }
         )
       )
@@ -59,7 +59,7 @@ export class AuthEffects {
       .pipe(
         ofType(fromCore.loginViewRequest),
         tap( () => {
-          console.log("Procesando ......")
+          console.log('Procesando ......');
           this.router.navigate(['login']);
         })
       ),
