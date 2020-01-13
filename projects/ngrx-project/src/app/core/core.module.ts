@@ -19,11 +19,12 @@ import {HttpClientModule} from "@angular/common/http";
 import {NoPageFoundComponent} from "./components/no-page-found/no-page-found.component";
 import {LoginComponent} from "./containers/login/login.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import {LayoutEffects} from "./store/effects";
+import {AccountsEffects, LayoutEffects} from "./store/effects";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {AccountService} from "./services/accounts.service";
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
     StoreModule.forFeature(forCore.layoutFeatureKey, forCore.layoutReducer ),
     StoreModule.forFeature(forCore.securityFeatureKey, forCore.authReducer ),
-    EffectsModule.forFeature([AuthEffects, LayoutEffects]),
+    StoreModule.forFeature(forCore.accountsFeatureKey, forCore.acccoutsReducer ),
+    EffectsModule.forFeature([AuthEffects, LayoutEffects, AccountsEffects]),
     CORE_ROUTERS
   ],
   exports: [
@@ -51,7 +53,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
   providers: [
     fakeBackendProvider,
     AuthService,
-    AuthGuard
+    AuthGuard,
+    AccountService
   ]
 })
 export class CoreModule { }

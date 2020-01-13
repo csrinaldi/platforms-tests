@@ -1,9 +1,3 @@
-<!--<button mat-button (click)="onLogin()">Login</button>-->
-
-<!--<mat-spinner *ngIf="loading$ | async"></mat-spinner>-->
-
-<!--<h2 *ngIf="(hasErrors$ | async) && (loading$ | async)">Error: {{errors$ | async | json}}</h2>-->
-
 <div class="container" fxLayout="column" fxLayoutAlign="center center" fxFlexAlign="center center" fxFill="" fxFlexFill="">
 
   <mat-progress-bar color="accent" mode="indeterminate" *ngIf="loading$ | async"></mat-progress-bar>
@@ -14,18 +8,18 @@
       <img src="/assets/icono.png">
     </div>
 
-    <div [@routerTransition]='' fxFlex="" fxLayout="column" *ngIf="step === StepPass.SelectUsers">
+    <div fxFlex="" fxLayout="column" *ngIf="step === StepPass.SelectUsers">
       <h1>Acceder</h1>
       <p>Accede a todas las funcionalidades</p>
 
       <mat-list style="margin-top: 20px" dense="true" fxLayout="column" fxFlexFill="">
-        <mat-list-item *ngFor="let user of localUsers" (click)="onLocalUserSelected(user)">
+        <mat-list-item *ngFor="let user of accounts$ | async" (click)="onLocalUserSelected(user)">
           <mat-icon mat-list-icon style="font-size: 36px; height: 36px; width: 36px; color: mat-color($accent, default-contrast);">
             account_circle
           </mat-icon>
           <h4 mat-line>{{user.firstName}}, {{user.lastName}}</h4>
           <p mat-line> {{user.username}} </p>
-          <button *ngIf="deleteAccount" mat-icon-button (click)="onDeleteAccountFronList(user)">
+          <button *ngIf="deleteAccount" mat-icon-button (click)="onDeleteAccountFromList(user)">
             <mat-icon>clear</mat-icon>
           </button>
         </mat-list-item>
@@ -50,7 +44,7 @@
       </mat-list>
     </div>
 
-    <form [@routerTransition]='' fxFlex="" fxLayout="column" *ngIf="step === StepPass.UserName" [formGroup]="userForm" (ngSubmit)="toPassword()"
+    <form fxFlex="" fxLayout="column" *ngIf="step === StepPass.UserName" [formGroup]="userForm" (ngSubmit)="toPassword()"
           novalidate>
       <mat-icon></mat-icon>
       <h1>Acceder</h1>
@@ -62,14 +56,18 @@
       </mat-form-field>
 
       <div fxFlex="row" style="margin-top: 25px">
-        <button mat-button>¿Olvidaste tu nombre de usuario?</button>
         <span fxFlex=""></span>
+        <button *ngIf="hasAccounts" type="submit" mat-raised-button color="primary" (click)="onBack()" style="margin-right: 5px">
+          Volver
+        </button>
         <button type="submit" mat-raised-button color="primary">Siguiente</button>
+      </div>
+      <div fxFlex="row" style="margin-top: 25px">
+        <button mat-button>¿Olvidaste tu nombre de usuario?</button>
       </div>
     </form>
 
-    <form [@routerTransition]='' (@routerTransition.done)="animationDone($event)" [formGroup]="passwordForm" (ngSubmit)="onLogin()"
-          fxFlex="" fxLayout="column" *ngIf="step === StepPass.Password" novalidate>
+    <form [formGroup]="passwordForm" (ngSubmit)="onLogin()" fxFlex="" fxLayout="column" *ngIf="step === StepPass.Password" novalidate>
 
       <div fxLayout="row" fxLayoutAlign="start center">
 
@@ -103,9 +101,9 @@
       <div fxFlex="row" fxLayoutAlign="end start">
         <button mat-button style="padding-left: 0px" (click)="forgotPassword()">¿Olvidaste la contraseña?</button>
         <span fxFlex=""></span>
-        <!--button type="submit" mat-raised-button color="primary" (click)="onBack()" style="margin-right: 15px">
-          Volver
-        </button-->
+        <button type="submit" mat-raised-button color="primary" (click)="onBack()" style="margin-right: 15px">
+            Volver
+        </button>
         <button type="submit" mat-raised-button color="primary" (click)="onLogin()">Aceptar</button>
       </div>
     </form>

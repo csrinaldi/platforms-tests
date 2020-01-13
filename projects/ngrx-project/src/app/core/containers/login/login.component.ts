@@ -3,11 +3,12 @@ import {select, Store} from "@ngrx/store";
 import * as fromCode from '../../store'
 import {EmailPasswordCredentials} from "../../domain/emailPasswordCredentials";
 import {Observable} from "rxjs";
-import * as fromCore from "../../store/reducers";
 import {User} from "../../domain/user";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {isNotNullOrUndefined} from "codelyzer/util/isNotNullOrUndefined";
+
+import * as fromCore from "../../store/reducers";
 
 enum StepPass {
   SelectUsers = '0',
@@ -25,12 +26,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
   errors$: Observable<Error>;
   hasErrors$: Observable<boolean>;
   loading$: Observable<boolean>;
+  accounts$: Observable<User[]>;
+  hasAccounts: boolean;
 
   StepPass = StepPass;
 
   step: StepPass = StepPass.SelectUsers;
-
-  localUsers: User[];
 
   referred;
 
@@ -64,29 +65,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.errors$ = this.store.pipe(select(fromCore.errors));
     this.hasErrors$ = this.store.pipe(select(fromCore.hasErrors));
     this.loading$ = this.store.pipe(select(fromCore.loading));
+    this.accounts$ = this.store.pipe(select(fromCore.accounts));
 
-    /*const vm = this;
-    vm.activatedRoute.queryParams.subscribe((value => {
-      if (!isNullOrUndefined(value)) {
-        const finded = Object.keys(value).find((v, index, objects) => {
-          return (v === 'ref');
-        });
-
-        if (finded) {
-          vm.referred = value['ref'];
-        } else {
-          vm.referred = '/home';
-        }
-      }
-
-    }));
-
-    vm.activatedRoute.data.subscribe(data => {
-      vm.localUsers = data['localUsers'];
-      if (isNullOrUndefined(vm.localUsers) || vm.localUsers.length === 0) {
-        vm.step = StepPass.UserName;
-      }
-    });*/
+    this.accounts$.subscribe(value => {
+      this.hasAccounts = ( value.length > 0);
+    })
   }
 
   onLogin() {
@@ -106,18 +89,20 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   onBack() {
-    // if ( !isNotNullOrUndefined(this.localUsers) && this.localUsers.length > 0 ) {
-    //   this.step = StepPass.SelectUsers;
-    // } else {
+    if ( this.hasAccounts ) {
+       this.step = StepPass.SelectUsers;
+     } else {
       this.step = StepPass.UserName;
-    // }
+    }
   }
 
   onDeleteAccount() {
     this.deleteAccount = !this.deleteAccount;
   }
 
-  async onDeleteAccountFronList(user) {
+  async onDeleteAccountFromList(user) {
+    this.store.dispatch(fromCode.deleteAccountRequest({account: user}));
+
     // const vm = this;
     // await vm.usersLocalDbService.removeUser(user);
     // vm.router.navigate(['/users/login'])

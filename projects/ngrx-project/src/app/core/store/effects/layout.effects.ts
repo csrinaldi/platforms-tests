@@ -30,7 +30,7 @@ export class LayoutEffects {
         map( (value: RouterNavigationAction) => {
           return value.payload.routerState['root']['firstChild'];
         }),
-        map(firstChild => {
+          map(firstChild => {
           if ( firstChild['data'] !== undefined &&  firstChild['data']['toolbar'] != undefined &&  firstChild['data']['toolbar'] ){
             return fromCore.showToolbar();
           } else {
