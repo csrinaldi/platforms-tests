@@ -13,7 +13,7 @@ import {fakeBackendProvider} from "./helpers";
 import {AuthService} from "./services/AuthService";
 import {EffectsModule} from "@ngrx/effects";
 import {AuthEffects} from "./store/effects/auth.effects";
-import {HomeComponent} from "./containers/home/home.component";
+import {HomeComponent} from "../containers/home/home.component";
 import {AuthGuard} from "./services/authGuard";
 import {HttpClientModule} from "@angular/common/http";
 import {NoPageFoundComponent} from "./components/no-page-found/no-page-found.component";
@@ -25,10 +25,12 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AccountService} from "./services/accounts.service";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
-  declarations: [RootComponent, LayoutComponent, SidenavComponent, ToolbarComponent, HomeComponent, NoPageFoundComponent, LoginComponent],
+  declarations: [RootComponent, LayoutComponent, SidenavComponent, ToolbarComponent, NoPageFoundComponent, LoginComponent],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
@@ -38,6 +40,8 @@ import {AccountService} from "./services/accounts.service";
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatFormFieldModule,
+    MatIconModule,
+    MatButtonModule,
 
     StoreModule.forFeature(forCore.layoutFeatureKey, forCore.layoutReducer ),
     StoreModule.forFeature(forCore.securityFeatureKey, forCore.authReducer ),
@@ -47,7 +51,6 @@ import {AccountService} from "./services/accounts.service";
   ],
   exports: [
     RootComponent,
-    HomeComponent,
     LoginComponent
   ],
   providers: [

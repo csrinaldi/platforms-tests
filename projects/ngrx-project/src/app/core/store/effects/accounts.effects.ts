@@ -2,18 +2,18 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {Injectable} from '@angular/core';
 import {map, switchMap, withLatestFrom} from 'rxjs/operators';
 
-import {deleteAccountRequest} from '../actions/accounts.actions';
+import {deleteAccountRequest, deleteAccountSuccess} from '../actions/accounts.actions';
 import {select, Store} from '@ngrx/store';
-import * as fromCore from '../index';
-import {from, of} from 'rxjs';
+import {of} from 'rxjs';
 import {User} from '../../domain/user';
+import {accounts, CoreState} from "../reducers";
 
 @Injectable()
 export class AccountsEffects {
 
   constructor(
     private actions$: Actions,
-    private store$: Store<fromCore.CoreState>) {}
+    private store$: Store<CoreState>) {}
 
   accountDelete$ = createEffect(
     () => this.actions$
@@ -21,12 +21,12 @@ export class AccountsEffects {
         ofType(deleteAccountRequest),
         switchMap(value => {
           return of(null).pipe(
-            withLatestFrom(this.store$.pipe(select(fromCore.accounts))),
+            withLatestFrom(this.store$.pipe(select(accounts))),
             map(([action, accounts]) => {
               const filtered = accounts.filter((user: User) => {
                 return user.username !== value.account.username;
               });
-              return fromCore.deleteAccountSuccess({accounts: filtered});
+              return deleteAccountSuccess({accounts: filtered});
             }));
         })
       )

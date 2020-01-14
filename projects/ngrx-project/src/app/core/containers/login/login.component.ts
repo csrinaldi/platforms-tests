@@ -74,12 +74,13 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   onLogin() {
     if (this.passwordForm.valid) {
-      const username = isNotNullOrUndefined(this.localUserSelected) ? this.userForm.get('username').value : this.localUserSelected['username'];
-      const passwd = this.passwordForm.get('password').value;
+
+      const username = isNotNullOrUndefined(this.localUserSelected) ? this.localUserSelected.username : this.userForm.get('username').value;
+      const password = this.passwordForm.get('password').value;
 
       const credentials = new EmailPasswordCredentials();
       credentials.username = username;
-      credentials.password = passwd;
+      credentials.password = password;
       this.store.dispatch(fromCode.loginRequest({credentials}))
     }
   }
@@ -144,10 +145,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   onLocalUserSelected(user: User) {
-    if ( !this.deleteAccount ) {
       this.localUserSelected = user;
+      console.log(this.localUserSelected);
       this.step = StepPass.Password;
-    }
   }
 
   /**

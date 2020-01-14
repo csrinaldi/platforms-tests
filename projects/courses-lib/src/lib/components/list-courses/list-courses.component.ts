@@ -1,6 +1,6 @@
 import {Component, ComponentFactoryResolver, Inject, Injector, OnInit} from '@angular/core';
 import {Course} from '../../model/course';
-import {ResolverService} from '@logikas/commons-lib';
+import {ResolverService} from 'commons-lib';
 
 @Component({
   selector: 'app-list-courses',

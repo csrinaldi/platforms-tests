@@ -13,15 +13,24 @@ import * as fromRoot from '../app/store/reducer/test.reducer';
 import {CoreModule} from "./core/core.module";
 import {RootComponent} from "./core/containers/root/root.component";
 import {HttpClientModule} from "@angular/common/http";
+import {HomeComponent} from "./containers/home/home.component";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
+import {RootEffects} from "./store/effects/root.effects";
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    HomeComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     CoreModule,
+    MatButtonModule,
+    MatIconModule,
     APP_ROUTERS,
+
 
     /**
      * StoreModule.forRoot is imported once in the root module, accepting a reducer
@@ -73,7 +82,7 @@ import {HttpClientModule} from "@angular/common/http";
      *
      * See: https://ngrx.io/guide/effects#registering-root-effects
      */
-    EffectsModule.forRoot([/*UserEffects, RouterEffects*/])
+    EffectsModule.forRoot([RootEffects/*UserEffects, RouterEffects*/])
   ],
   providers: [],
   bootstrap: [

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {GenericSearchComponent} from "@logikas/commons-lib";
+import {GenericSearchComponent} from "commons-lib";
 
 export class SearchData {
   public name: string;
