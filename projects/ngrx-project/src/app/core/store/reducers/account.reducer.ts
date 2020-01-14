@@ -13,8 +13,8 @@ export interface AccountState {
 
 const initialState: AccountState = {
   accounts: [
-    <User>{ 'firstName': 'Cristian', "lastName": 'Rinaldi', "username" : 'csrinaldi' },
-    <User>{ 'firstName': 'John', "lastName": 'Doe', "username" : 'jdoe' }
+    { firstName: 'Cristian', lastName: 'Rinaldi', username : 'csrinaldi' } as User,
+    { firstName: 'John', lastName: 'Doe', username : 'jdoe' } as User
   ],
   loading: false,
   hasError: false,
@@ -27,8 +27,8 @@ export const acccoutsReducer = createReducer(
   on(AccountActions.loadAccountsSuccess, (state: AccountState, {accounts}) => ({...state, loading: false, accounts })),
   on(AccountActions.loadAccountsFailure, (state: AccountState, {error}) => ({...state, loading: false, error, hasError: true, accounts: [] })),
   on(AccountActions.deleteAccountRequest, (state: AccountState, {account}) => ({...state, loading: true})),
-  on(AccountActions.deleteAccountSuccess,(state: AccountState, {accounts}) => ({...state, loading: false, accounts })),
-  on(AccountActions.deleteAccountFailure,(state: AccountState, {error}) => ({...state, loading: false, error, hasError: true })),
+  on(AccountActions.deleteAccountSuccess, (state: AccountState, {accounts}) => ({...state, loading: false, accounts })),
+  on(AccountActions.deleteAccountFailure, (state: AccountState, {error}) => ({...state, loading: false, error, hasError: true })),
 );
 
 export const accountsFeature = createFeatureSelector<AccountState>(accountsFeatureKey);
