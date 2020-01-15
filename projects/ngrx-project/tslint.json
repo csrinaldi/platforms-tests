@@ -9,6 +9,7 @@
     ],
     "component-selector": [
       true,
+      "lgk",
       "element",
       "app",
       "kebab-case"

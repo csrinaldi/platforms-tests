@@ -6,7 +6,7 @@ import {deleteAccountRequest, deleteAccountSuccess} from '../actions/accounts.ac
 import {select, Store} from '@ngrx/store';
 import {of} from 'rxjs';
 import {User} from '../../domain/user';
-import {accounts, CoreState} from "../reducers";
+import {accounts, CoreState} from '../reducers';
 
 @Injectable()
 export class AccountsEffects {

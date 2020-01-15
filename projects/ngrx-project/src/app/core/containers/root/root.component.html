@@ -1,7 +1,7 @@
 <s-layout>
-    <s-toolbar *ngIf="showToolbar$ | async" toolbar [title]="value$ | async" (toggle)="changeState()">
-      <button mat-button (click)="onHome()">Home</button>
-    </s-toolbar>
+    <lkg-toolbar *ngIf="showToolbar$ | async" toolbar [title]="value$ | async" (toggle)="changeState()">
+<!--      <button mat-button (click)="onHome()">Home</button>-->
+    </lkg-toolbar>
     <div content class="content">
       <router-outlet ></router-outlet>
     </div>

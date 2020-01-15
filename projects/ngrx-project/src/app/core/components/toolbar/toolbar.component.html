@@ -6,7 +6,7 @@
           <mat-icon>menu</mat-icon>
         </button>
         <img src="{{logo$ | async}}">
-        <h3 style="margin-left: 20px">{{title}}</h3>
+        <!--h3 style="margin-left: 20px">{{title}}</h3-->
       </div>
 
       <div fxFlex="">
@@ -28,8 +28,7 @@
 <!--      </ng-template>-->
 
       <span fxFlex=""></span>
-
-      <h3></h3>
+      <h3> Logged In: {{ (principal$ | async).user.firstName}},  {{ (principal$ | async).user.lastName}}</h3>
       <button *ngIf="hasLogout$ | async" mat-icon-button="" (click)="logout()">
         <mat-icon class="mat-36">exit_to_app</mat-icon>
       </button>
