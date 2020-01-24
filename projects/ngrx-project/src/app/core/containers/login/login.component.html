@@ -1,112 +1,142 @@
-<div class="container" fxLayout="column" fxLayoutAlign="center center" fxFlexAlign="center center" fxFill="" fxFlexFill="">
+<div class="container" fxLayout="column" fxLayoutAlign="center center" fxFlexAlign="center center" fxFill=""
+     fxFlexFill="">
 
   <mat-progress-bar color="accent" mode="indeterminate" *ngIf="loading$ | async"></mat-progress-bar>
 
   <div class="lh-login mat-elevation-z4" fxLayout="column">
 
-    <div class="header" fxFlex="60px" fxLayout="row" fxLayoutAlign="start start" style="margin-left: -30px; margin-top: 5px;">
+    <div class="header" fxFlex="36px" fxLayout="row" fxLayoutAlign="start center">
       <img src="/assets/icono.png">
+      <p>Completa tus credenciales</p>
     </div>
 
-    <div fxFlex="" fxLayout="column" *ngIf="step === StepPass.SelectUsers">
-      <h1>Acceder</h1>
-      <p>Accede a todas las funcionalidades</p>
+    <div class="content" fxLayout="row" fxFlex="" [ngSwitch]="step">
 
-      <mat-list style="margin-top: 20px" dense="true" fxLayout="column" fxFlexFill="">
-        <mat-list-item *ngFor="let user of accounts$ | async" (click)="onLocalUserSelected(user)">
-          <mat-icon mat-list-icon style="font-size: 36px; height: 36px; width: 36px; color: mat-color($accent, default-contrast);">
-            account_circle
-          </mat-icon>
-          <h4 mat-line>{{user.firstName}}, {{user.lastName}}</h4>
-          <p mat-line> {{user.username}} </p>
-          <button *ngIf="deleteAccount" mat-icon-button (click)="onDeleteAccountFromList(user)">
-            <mat-icon>clear</mat-icon>
-          </button>
-        </mat-list-item>
-        <mat-list-item (click)="toOtherAccount()">
-          <mat-icon style="font-size: 36px; height: 36px; width: 36px" mat-list-icon>account_circle</mat-icon>
-          <h4 mat-line>Seleccione otra Cuenta</h4>
-          <p mat-line>Ingrese</p>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-      </mat-list>
-      <span fxFlex=""></span>
-      <mat-list style="margin-top: 20px" dense="true" fxLayout="column" fxFlexFill="">
-        <mat-list-item fxFlex=""></mat-list-item>
-        <mat-list-item *ngIf="!deleteAccount" style="margin-top: 20px" (click)="onDeleteAccount()">
-          <mat-icon style="font-size: 36px; height: 36px; width: 36px" mat-list-icon>delete</mat-icon>
-          <h4 mat-line>Quitar una cuenta</h4>
-        </mat-list-item>
-        <mat-list-item *ngIf="deleteAccount" style="margin-top: 20px" (click)="onDeleteAccount()">
-          <mat-icon style="font-size: 36px; height: 36px; width: 36px" mat-list-icon>done</mat-icon>
-          <h4 mat-line>Finalizar</h4>
-        </mat-list-item>
-      </mat-list>
-    </div>
+      <template *ngSwitchCase="StepPass.SelectUsers" fxFlex="">
+        <div fxFlex="" fxLayout="column">
+          <h1>Acceder</h1>
+          <p>Accede a todas las funcionalidades</p>
 
-    <form fxFlex="" fxLayout="column" *ngIf="step === StepPass.UserName" [formGroup]="userForm" (ngSubmit)="toPassword()"
-          novalidate>
-      <mat-icon></mat-icon>
-      <h1>Acceder</h1>
-      <p>Accede a todas las funcionalidades</p>
-
-      <mat-form-field hideRequiredMarker="true" floatPlaceholder="true" fxFlex="">
-        <input autofocus matInput placeholder="Nombre de usuario o Correo electronico" required formControlName="username">
-        <mat-error *ngIf="userForm.invalid">{{getUserNameErrorMessage()}}</mat-error>
-      </mat-form-field>
-
-      <div fxFlex="row" style="margin-top: 25px">
-        <span fxFlex=""></span>
-        <button *ngIf="hasAccounts" type="submit" mat-raised-button color="primary" (click)="onBack()" style="margin-right: 5px">
-          Volver
-        </button>
-        <button type="submit" mat-raised-button color="primary">Siguiente</button>
-      </div>
-      <div fxFlex="row" style="margin-top: 25px">
-        <button mat-button>¿Olvidaste tu nombre de usuario?</button>
-      </div>
-    </form>
-
-    <form [formGroup]="passwordForm" (ngSubmit)="onLogin()" fxFlex="" fxLayout="column" *ngIf="step === StepPass.Password" novalidate>
-
-      <div fxLayout="row" fxLayoutAlign="start center">
-
-        <div fxFlex *ngIf="localUserSelected !== undefined">
-          <h1>{{localUserSelected.firstName}} {{localUserSelected.lastName}}</h1>
-          <p>{{localUserSelected.username}}</p>
+          <mat-list style="margin-top: 20px" dense="true" fxLayout="column">
+            <mat-list-item *ngFor="let user of accounts$ | async" (click)="onLocalUserSelected(user)">
+              <!--color: mat-color($accent, default-contrast);-->
+              <mat-icon mat-list-icon style="font-size: 36px; height: 36px; width: 36px; ">
+                account_circle
+              </mat-icon>
+              <h4 mat-line>{{user.firstName}}, {{user.lastName}}</h4>
+              <p mat-line> {{user.username}} </p>
+              <button *ngIf="deleteAccount" mat-icon-button (click)="onDeleteAccountFromList(user)">
+                <mat-icon>clear</mat-icon>
+              </button>
+            </mat-list-item>
+            <mat-list-item (click)="toOtherAccount()">
+              <mat-icon style="font-size: 36px; height: 36px; width: 36px" mat-list-icon>account_circle</mat-icon>
+              <h4 mat-line>Seleccione otra Cuenta</h4>
+              <p mat-line>Ingrese</p>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </mat-list>
+          <span fxFlex=""></span>
+          <mat-list style="margin-top: 20px" dense="true" fxLayout="column">
+            <mat-list-item fxFlex=""></mat-list-item>
+            <mat-list-item *ngIf="!deleteAccount" style="margin-top: 20px" (click)="onDeleteAccount()">
+              <mat-icon style="font-size: 36px; height: 36px; width: 36px" mat-list-icon>delete</mat-icon>
+              <h4 mat-line>Quitar una cuenta</h4>
+            </mat-list-item>
+            <mat-list-item *ngIf="deleteAccount" style="margin-top: 20px" (click)="onDeleteAccount()">
+              <mat-icon style="font-size: 36px; height: 36px; width: 36px" mat-list-icon>done</mat-icon>
+              <h4 mat-line>Finalizar</h4>
+            </mat-list-item>
+          </mat-list>
         </div>
+      </template>
 
-        <div fxFlex *ngIf="localUserSelected === undefined">
-          <h1>Le damos la Bienvenida</h1>
-          <div fxLayout="row" fxLayoutAlign="start center">
-            <mat-icon style="margin-right: 15px">account_circle</mat-icon>
-            <span>{{userForm.controls['username'].value}}</span>
+      <template *ngSwitchCase="StepPass.UserName">
+        <form fxFlex="" fxLayout="column" [formGroup]="userForm" (ngSubmit)="toPassword()" novalidate>
+          <mat-icon></mat-icon>
+          <h1>Acceder</h1>
+          <p>Accede a todas las funcionalidades</p>
+
+          <mat-form-field hideRequiredMarker="true" floatPlaceholder="true" fxFlex="">
+            <input autofocus matInput placeholder="Nombre de usuario o Correo electronico" required
+                   formControlName="username">
+            <mat-error *ngIf="userForm.invalid">{{getUserNameErrorMessage()}}</mat-error>
+          </mat-form-field>
+
+          <div fxFlex="row" style="margin-top: 25px">
+            <span fxFlex=""></span>
+            <button *ngIf="hasAccounts" type="submit" mat-raised-button color="primary" (click)="onBack()"
+                    style="margin-right: 5px">
+              Volver
+            </button>
+            <button type="submit" mat-raised-button color="primary">Siguiente</button>
           </div>
-        </div>
+          <div fxFlex="row" style="margin-top: 25px">
+            <button mat-button>¿Olvidaste tu nombre de usuario?</button>
+          </div>
+        </form>
+      </template>
 
-        <button mat-icon-button (click)="onBack()">
-          <mat-icon class="mat-36">keyboard_arrow_left</mat-icon>
-        </button>
-      </div>
+      <template *ngSwitchCase="StepPass.Password" class="password_template">
+        <form [formGroup]="passwordForm" (ngSubmit)="onLogin()" fxFlex="" fxLayout="column" novalidate>
 
-      <mat-form-field hideRequiredMarker="false" floatPlaceholder="true">
-        <input type="password" #password formControlName="password" matInput placeholder="Ingrese su contraseña" required>
-        <mat-error *ngIf="passwordForm.invalid">{{getPasswordErrorMessage()}}</mat-error>
-      </mat-form-field>
+          <div fxLayout="column" fxLayoutAlign="start center">
 
-      <div fxFlex="row" fxLayoutAlign="start start" style="margin-top: 50px;">
+            <!--img src="assets/avatar_user.jpg"-->
 
-      </div>
+            <ng-container *ngIf="(localUserSelected !== undefined) then viewUserSelected else notViewUserSelected">
 
-      <div fxFlex="row" fxLayoutAlign="end start">
-        <button mat-button style="padding-left: 0px" (click)="forgotPassword()">¿Olvidaste la contraseña?</button>
-        <span fxFlex=""></span>
-        <button type="submit" mat-raised-button color="primary" (click)="onBack()" style="margin-right: 15px">
-            Volver
-        </button>
-        <button type="submit" mat-raised-button color="primary" (click)="onLogin()">Aceptar</button>
-      </div>
-    </form>
+            </ng-container>
+
+            <ng-template #viewUserSelected>
+              <div fxLayout="column" fxLayoutAlign="center center" fxFlex class="userinfo">
+                <img src="assets/credential.png" style="height: 64px; width: 64px">
+                <h1>{{localUserSelected.firstName}} {{localUserSelected.lastName}}</h1>
+                <div fxLayout="row" fxLayoutAlign="end center" style="width: 100%; height: 32px; margin-top: 5px; cursor: pointer" (click)="onBack()">
+                  <img class="mat-24" style="width: 24px; height: 24px" src="assets/logo_flat.png">
+                  <span fxFlex="" style="text-align: center">{{localUserSelected.username}}</span>
+                  <mat-icon class="mat-36">keyboard_arrow_down</mat-icon>
+                </div>
+              </div>
+            </ng-template>
+
+
+            <ng-template #notViewUserSelected>
+              <div fxFlex>
+                <h1>Le damos la Bienvenida</h1>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <mat-icon style="margin-right: 15px">account_circle</mat-icon>
+                  <span>{{userForm.controls['username'].value}}</span>
+                </div>
+              </div>
+            </ng-template>
+
+          </div>
+
+          <div fxFlex=""></div>
+
+          <mat-form-field appearance="outline" autofocus>
+            <mat-label>Ingresa tu contraseña</mat-label>
+            <input type="password" #password formControlName="password" matInput placeholder="Ingrese su contraseña"
+                   required autofocus>
+            <mat-error *ngIf="passwordForm.invalid">{{getPasswordErrorMessage()}}</mat-error>
+          </mat-form-field>
+
+          <div fxFlex="row" fxLayoutAlign="start start" style="margin-top: 50px;">
+
+          </div>
+
+          <div fxFlex="row" fxLayoutAlign="end start">
+            <button mat-button style="padding-left: 0px" (click)="forgotPassword()">¿Olvidaste la contraseña?</button>
+            <span fxFlex=""></span>
+            <button type="submit" mat-raised-button color="primary" (click)="onBack()" style="margin-right: 15px">
+              Volver
+            </button>
+            <button type="submit" mat-raised-button color="primary" (click)="onLogin()">Aceptar</button>
+          </div>
+        </form>
+      </template>
+    </div>
 
   </div>
 

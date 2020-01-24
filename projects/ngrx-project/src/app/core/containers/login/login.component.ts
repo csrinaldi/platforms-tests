@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       const credentials = new EmailPasswordCredentials();
       credentials.username = username;
       credentials.password = password;
-      this.store.dispatch(fromCode.loginRequest({credentials}))
+      this.store.dispatch(fromCode.loginRequest({credentials}));
     }
   }
 
