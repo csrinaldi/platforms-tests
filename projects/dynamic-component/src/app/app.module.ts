@@ -2,16 +2,15 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
+import {LayoutComponent} from '../../../core-lib/src/lib/components/layout.component/layout.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {ReactiveFormsModule} from '@angular/forms';
-import {CommonsModule} from './commons/commons.module';
-import { HomeComponent } from './home/home.component';
+import {HomeComponent} from './home/home.component';
+import {CommonsLibModule} from "../../../commons-lib/src/lib/commons-lib.module";
 
 @NgModule({
   declarations: [
-    AppComponent,
     HomeComponent
   ],
   imports: [
@@ -20,9 +19,9 @@ import { HomeComponent } from './home/home.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    CommonsModule.forRoot()
+    CommonsLibModule.forRoot(),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [LayoutComponent]
 })
 export class AppModule { }
