@@ -93,7 +93,7 @@
 
             <ng-template #viewUserSelected>
               <div fxLayout="column" fxLayoutAlign="center center" fxFlex class="userinfo">
-                <img src="assets/credential.png" style="height: 64px; width: 64px">
+                <img src="assets/credential.png" style="height: 48px; width: 48px">
                 <h1>{{localUserSelected.firstName}} {{localUserSelected.lastName}}</h1>
                 <div fxLayout="row" fxLayoutAlign="end center"
                      style="width: 100%; height: 32px; margin-top: 5px; cursor: pointer" (click)="onBack()">
@@ -123,12 +123,10 @@
             <mat-label>Ingresa tu contraseña</mat-label>
             <input type="password" #password formControlName="password" matInput placeholder="Ingrese su contraseña"
                    required>
-            <mat-error *ngIf="passwordForm.invalid">{{getPasswordErrorMessage()}}</mat-error>
+              <mat-error *ngIf="passwordForm.invalid">{{getPasswordErrorMessage()}}</mat-error>
           </mat-form-field>
 
-          <div fxFlex="row" fxLayoutAlign="start start" style="margin-top: 50px;">
-
-          </div>
+          <mat-error *ngIf="hasErrors$ | async">{{getServerErrorMessage() | async}}</mat-error>
 
           <div fxFlex="row" fxLayoutAlign="end start">
             <button mat-button style="padding-left: 0px" (click)="forgotPassword()">¿Olvidaste la contraseña?</button>

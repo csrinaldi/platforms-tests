@@ -17,6 +17,7 @@ import {Router} from '@angular/router';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 import * as fromCore from '../../store/reducers';
+import {map} from "rxjs/operators";
 
 enum StepPass {
   SelectUsers = '0',
@@ -113,13 +114,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   async onDeleteAccountFromList(user) {
     this.store.dispatch(fromCode.deleteAccountRequest({account: user}));
-
-    // const vm = this;
-    // await vm.usersLocalDbService.removeUser(user);
-    // vm.router.navigate(['/users/login'])
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   }
 
   toPassword() {
@@ -139,11 +133,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
     });
   }
 
-  animationDone($event: any) {
-    if ( !isNotNullOrUndefined(this.passwordElementRef)) {
-      // this.passwordElementRef['nativeElement'].focus();
-    }
-  }
 
   getUserNameErrorMessage() {
     const control = this.userForm.get('username');
@@ -172,4 +161,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.router.navigate(['users/forgot']);
   }
 
+  getServerErrorMessage(): Observable<string> {
+    return this.errors$.pipe(
+      map( (value: any) => {
+        return 'Server Error: ' + value.error.message;
+      })
+    );
+  }
 }
