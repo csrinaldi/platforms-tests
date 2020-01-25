@@ -1,14 +1,22 @@
-import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren} from '@angular/core';
-import {select, Store} from "@ngrx/store";
-import * as fromCode from '../../store'
-import {EmailPasswordCredentials} from "../../domain/emailPasswordCredentials";
-import {Observable} from "rxjs";
-import {User} from "../../domain/user";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {isNotNullOrUndefined} from "codelyzer/util/isNotNullOrUndefined";
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  OnInit,
+  QueryList,
+  ViewChildren
+} from '@angular/core';
+import {select, Store} from '@ngrx/store';
+import * as fromCode from '../../store';
+import {EmailPasswordCredentials} from '../../domain/emailPasswordCredentials';
+import {Observable} from 'rxjs';
+import {User} from '../../domain/user';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
-import * as fromCore from "../../store/reducers";
+import * as fromCore from '../../store/reducers';
 
 enum StepPass {
   SelectUsers = '0',
@@ -19,7 +27,8 @@ enum StepPass {
 @Component({
   selector: 's-home',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit, AfterViewInit {
 
@@ -69,7 +78,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     this.accounts$.subscribe(value => {
       this.hasAccounts = ( value.length > 0);
-    })
+    });
+
   }
 
   onLogin() {
@@ -114,13 +124,18 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   toPassword() {
     if (this.userForm.valid) {
+      this.passwordForm.reset();
       this.step = StepPass.Password;
     }
   }
 
   ngAfterViewInit(): void {
     this.password.changes.subscribe((c: QueryList<ElementRef>) => {
-      this.passwordElementRef = c.first;
+      setTimeout( () => {
+        if ( c.first !== undefined ) {
+          c.first.nativeElement.focus();
+        }
+      }, 10);
     });
   }
 
@@ -141,12 +156,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
   getPasswordErrorMessage() {
     const control = this.passwordForm.get('password');
     return control.hasError('required') ? 'Debe ingresar la contraseña' : '';
-
   }
+
 
   onLocalUserSelected(user: User) {
       this.localUserSelected = user;
-      console.log(this.localUserSelected);
+      this.passwordForm.reset();
       this.step = StepPass.Password;
   }
 

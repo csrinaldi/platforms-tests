@@ -51,38 +51,41 @@
         </div>
       </template>
 
-      <template *ngSwitchCase="StepPass.UserName">
+      <template *ngSwitchCase="StepPass.UserName" style="width: 100%">
         <form fxFlex="" fxLayout="column" [formGroup]="userForm" (ngSubmit)="toPassword()" novalidate>
-          <mat-icon></mat-icon>
-          <h1>Acceder</h1>
-          <p>Accede a todas las funcionalidades</p>
 
-          <mat-form-field hideRequiredMarker="true" floatPlaceholder="true" fxFlex="">
-            <input autofocus matInput placeholder="Nombre de usuario o Correo electronico" required
-                   formControlName="username">
-            <mat-error *ngIf="userForm.invalid">{{getUserNameErrorMessage()}}</mat-error>
-          </mat-form-field>
+          <div fxLayout="column" fxLayoutAlign="start center">
 
-          <div fxFlex="row" style="margin-top: 25px">
-            <span fxFlex=""></span>
-            <button *ngIf="hasAccounts" type="submit" mat-raised-button color="primary" (click)="onBack()"
-                    style="margin-right: 5px">
-              Volver
-            </button>
-            <button type="submit" mat-raised-button color="primary">Siguiente</button>
-          </div>
-          <div fxFlex="row" style="margin-top: 25px">
-            <button mat-button>¿Olvidaste tu nombre de usuario?</button>
+            <mat-icon></mat-icon>
+            <h1>Acceder</h1>
+            <p>Accede a todas las funcionalidades</p>
+
+            <mat-form-field hideRequiredMarker="true" floatPlaceholder="true" fxFlex="" style="width: 100%">
+              <input autofocus matInput placeholder="Nombre de usuario o Correo electronico" required
+                     formControlName="username">
+              <mat-error *ngIf="userForm.invalid">{{getUserNameErrorMessage()}}</mat-error>
+            </mat-form-field>
+
+            <div fxFlex="row" style="margin-top: 25px">
+              <span fxFlex=""></span>
+              <button *ngIf="hasAccounts" type="submit" mat-raised-button color="primary" (click)="onBack()"
+                      style="margin-right: 5px">
+                Volver
+              </button>
+              <button type="submit" mat-raised-button color="primary">Siguiente</button>
+            </div>
+            <div fxFlex="row" style="margin-top: 25px">
+              <button mat-button>¿Olvidaste tu nombre de usuario?</button>
+            </div>
           </div>
         </form>
+
       </template>
 
       <template *ngSwitchCase="StepPass.Password" class="password_template">
         <form [formGroup]="passwordForm" (ngSubmit)="onLogin()" fxFlex="" fxLayout="column" novalidate>
 
           <div fxLayout="column" fxLayoutAlign="start center">
-
-            <!--img src="assets/avatar_user.jpg"-->
 
             <ng-container *ngIf="(localUserSelected !== undefined) then viewUserSelected else notViewUserSelected">
 
@@ -92,7 +95,8 @@
               <div fxLayout="column" fxLayoutAlign="center center" fxFlex class="userinfo">
                 <img src="assets/credential.png" style="height: 64px; width: 64px">
                 <h1>{{localUserSelected.firstName}} {{localUserSelected.lastName}}</h1>
-                <div fxLayout="row" fxLayoutAlign="end center" style="width: 100%; height: 32px; margin-top: 5px; cursor: pointer" (click)="onBack()">
+                <div fxLayout="row" fxLayoutAlign="end center"
+                     style="width: 100%; height: 32px; margin-top: 5px; cursor: pointer" (click)="onBack()">
                   <img class="mat-24" style="width: 24px; height: 24px" src="assets/logo_flat.png">
                   <span fxFlex="" style="text-align: center">{{localUserSelected.username}}</span>
                   <mat-icon class="mat-36">keyboard_arrow_down</mat-icon>
@@ -115,10 +119,10 @@
 
           <div fxFlex=""></div>
 
-          <mat-form-field appearance="outline" autofocus>
+          <mat-form-field appearance="outline">
             <mat-label>Ingresa tu contraseña</mat-label>
             <input type="password" #password formControlName="password" matInput placeholder="Ingrese su contraseña"
-                   required autofocus>
+                   required>
             <mat-error *ngIf="passwordForm.invalid">{{getPasswordErrorMessage()}}</mat-error>
           </mat-form-field>
 
