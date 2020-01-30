@@ -1,7 +1,6 @@
 import {Course} from '../../model/course';
 import {createFeatureSelector, createReducer, createSelector, on} from '@ngrx/store';
 import {CourseActions} from '../actions';
-import {layoutFeature} from "../../../../../ngrx-project/src/app/core/store/reducers";
 
 export const coursesFeatureKey = 'courses';
 
