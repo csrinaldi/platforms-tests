@@ -16,6 +16,9 @@ const routes: Routes = [
 
   {
     path: 'courses',
+    data: {
+      toolbar: true
+    },
     loadChildren: () =>
       import('courses-lib').then(module => module.CourseModule),
       canActivate: [AuthGuard],

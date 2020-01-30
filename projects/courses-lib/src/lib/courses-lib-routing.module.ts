@@ -1,13 +1,15 @@
 import {ModuleWithProviders} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ListCoursesComponent} from "./components/list-courses/list-courses.component";
-import {CourseSearchFormComponent} from "./components/course-search-form-component/course-search-form.component";
+import {ListCoursesComponent} from './containers/list-courses/list-courses.component';
+import {CourseSearchFormComponent} from './components/course-search-form-component/course-search-form.component';
+import {CoursesResolver} from './services/courses.resolver';
 
 
 const routes: Routes = [
   {
     path: '',
     component: ListCoursesComponent,
+    resolve: CoursesResolver,
     data: {
       search: {
         component: CourseSearchFormComponent

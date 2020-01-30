@@ -12,8 +12,8 @@
     ]
   },
   "angularCompilerOptions": {
-    "aot": "false",
-    "enableIvy": false,
+    "aot": "true",
+    "enableIvy": true,
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true,
     "enableResourceInlining": true
