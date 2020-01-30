@@ -18,10 +18,13 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {RootEffects} from "./store/effects/root.effects";
 import {FlexModule} from "@angular/flex-layout";
+import {LgkGrid} from "./components/lgk-grid/lgk-grid";
+import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    LgkGrid
   ],
     imports: [
         BrowserModule,
@@ -30,6 +33,8 @@ import {FlexModule} from "@angular/flex-layout";
         CoreModule,
         MatButtonModule,
         MatIconModule,
+        MatGridListModule,
+
         APP_ROUTERS,
 
 

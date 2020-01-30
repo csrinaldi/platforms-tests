@@ -1,0 +1,43 @@
+<div fxLayout="column" fxFlexFill="">
+  <mat-grid-list cols="7" rowHeight="fit" style="width: 100%" fxFlex="">
+    <mat-grid-tile
+      *ngFor="let tile of tiles"
+      [colspan]="tile.cols"
+      [rowspan]="tile.rows"
+      style="border: #e0e0e0 1px solid;"
+      [style.background]="tile.color">
+      <mat-grid-tile-header style="height: 50px; padding-right: 0px!important;">
+        <div mat-line="" fxLayout="column">
+          <span>Lunes</span>
+          <span>2</span>
+        </div>
+        <button mat-icon-button="">
+          <mat-icon>settings</mat-icon>
+        </button>
+      </mat-grid-tile-header>
+
+      <div fxFlex="" fxLayout="column" fxLayoutAlign="start end" style="border: 1px solid #455a64" style="margin-top:50px; width: 100%; height: calc(100% - 50px)">
+        <div fxFlex="" fxLayout="row" fxLayoutAlign="start center" style="padding: 5px; width: 100%; min-height: 50px">
+
+          <div class="box">
+<!--            <lgk-calendar-info color="#4285f4" turns="20" overTourns="2"></lgk-calendar-info>-->
+<!--            <lgk-calendar-info color="#ffaadd" turns="35" overTourns="0"></lgk-calendar-info>-->
+<!--            <lgk-calendar-info color="#4285f4" turns="20" overTourns="2"></lgk-calendar-info>-->
+<!--            <lgk-calendar-info color="#ffaadd" turns="35" overTourns="0"></lgk-calendar-info>-->
+<!--            <lgk-calendar-info color="#4285f4" turns="20" overTourns="2"></lgk-calendar-info>-->
+<!--            <lgk-calendar-info color="#ffaadd" turns="35" overTourns="0"></lgk-calendar-info>-->
+          </div>
+
+        </div>
+
+        <div fxFlex="" fxLayout="row" fxLayoutAlign="start end">
+          <button mat-icon-button="">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
