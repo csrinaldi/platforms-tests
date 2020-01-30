@@ -4,6 +4,7 @@ import {CoursesService} from '../../..';
 import {Injectable} from '@angular/core';
 import {EMPTY} from 'rxjs';
 import {CourseActions} from '../actions';
+import {loadCoursesRequestSuccess} from "../actions/courses.actions";
 
 @Injectable()
 export class CoursesEffects {
@@ -16,11 +17,14 @@ export class CoursesEffects {
    */
   loadCoursesEffect$ = createEffect(() => this.actions$.pipe(
     ofType(CourseActions.loadCoursesRequest.type),
-    mergeMap(() => this.coursesService.getAll()
-      .pipe(
-        map(courses => ({type: CourseActions.loadCoursesRequestSuccess.type, payload: courses})),
-        catchError(() => EMPTY)
-      ))
+    mergeMap(() => {
+      console.log("En el Efecto!!!")
+      return this.coursesService.getAll()
+        .pipe(
+          map(courses => loadCoursesRequestSuccess({courses})),
+          catchError(() => EMPTY)
+        )
+    })
     )
   );
 

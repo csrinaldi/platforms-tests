@@ -11,7 +11,7 @@ import {Observable} from "rxjs";
 })
 export class ListCoursesComponent implements OnInit {
 
-  courses$: Observable<Course[]>;
+  courses$: Course[];
 
   constructor(private route: ActivatedRoute, private resolverService: ResolverService, private resolver: ComponentFactoryResolver, private injector: Injector) {
     console.log("Construyendo ...." + resolverService.n);
@@ -19,7 +19,7 @@ export class ListCoursesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.courses$ = this.route.snapshot.data['courses'];
+    this.courses$ = this.route.snapshot.data['courses$'];
   }
 
 }

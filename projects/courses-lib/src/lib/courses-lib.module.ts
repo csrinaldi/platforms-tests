@@ -9,6 +9,9 @@ import {SCHEDULER_ROUTERS} from './courses-lib-routing.module';
 import {CoursesService} from './services/courses.service';
 import {CoursesFakeBackendInterceptor} from './_helper/courses.fake.backend';
 import {CourseStoreModule} from './store';
+import {CoursesResolver} from "./services/courses.resolver";
+import {HttpClientModule} from "@angular/common/http";
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -17,7 +20,9 @@ import {CourseStoreModule} from './store';
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     ReactiveFormsModule,
+    MatMenuModule,
     CommonsLibModule,
     CourseStoreModule,
     SCHEDULER_ROUTERS
@@ -30,6 +35,7 @@ import {CourseStoreModule} from './store';
   ],
   providers: [
     CoursesFakeBackendInterceptor,
+    CoursesResolver,
     CoursesService
   ],
 })

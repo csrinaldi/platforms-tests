@@ -1,17 +1,26 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 import {Course} from "../model/course";
+
+const courses: Course[] = []
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    courses.push(new Course("Angular", 'Angular'));
+  }
 
   public getAll(): Observable<Course[]>{
-    return this.http.get<Course[]>('/courses');
+
+     return of(courses);
+
+    //return this.http.get<Course[]>('/courses');
   }
 
 

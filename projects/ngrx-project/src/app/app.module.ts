@@ -20,6 +20,7 @@ import {RootEffects} from "./store/effects/root.effects";
 import {FlexModule} from "@angular/flex-layout";
 import {LgkGrid} from "./components/lgk-grid/lgk-grid";
 import {MatGridListModule} from "@angular/material/grid-list";
+import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,8 @@ import {MatGridListModule} from "@angular/material/grid-list";
         MatButtonModule,
         MatIconModule,
         MatGridListModule,
+        MatCardModule,
+
 
         APP_ROUTERS,
 

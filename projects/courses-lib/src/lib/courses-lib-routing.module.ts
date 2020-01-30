@@ -9,7 +9,7 @@ const routes: Routes = [
   {
     path: '',
     component: ListCoursesComponent,
-    resolve: CoursesResolver,
+    resolve: { courses$ : CoursesResolver },
     data: {
       search: {
         component: CourseSearchFormComponent

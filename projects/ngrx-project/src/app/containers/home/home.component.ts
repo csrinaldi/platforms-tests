@@ -22,6 +22,12 @@ export class HomeComponent implements OnInit {
   }
 
   toCourses() {
-    this.router.navigate(['courses']);
+    this.router.navigate(['courses'])
+      .then( (data) => {
+        console.log('Ruteamos perfecto');
+      })
+      .catch( (errors) => {
+        console.log(errors);
+    } );
   }
 }

@@ -28,10 +28,18 @@
 <!--      </ng-template>-->
 
       <span fxFlex=""></span>
-      <h3> Logged In: {{ (principal$ | async).user.firstName}},  {{ (principal$ | async).user.lastName}}</h3>
-      <button *ngIf="hasLogout$ | async" mat-icon-button="" (click)="logout()">
-        <mat-icon class="mat-36">exit_to_app</mat-icon>
-      </button>
+      <ng-container *ngIf="(principal$ | async) !== undefined then loggedIn; else notLoggedIn"></ng-container>
+      <ng-template #loggedIn>
+        <h3> Logged In: {{ (principal$ | async).user.firstName}},  {{ (principal$ | async).user.lastName}}</h3>
+        <button *ngIf="hasLogout$ | async" mat-icon-button="" (click)="logout()">
+          <mat-icon class="mat-36">exit_to_app</mat-icon>
+        </button>
+      </ng-template>
+
+      <ng-template #notLoggedIn>
+        Not LoggedIn
+      </ng-template>
+
     </mat-toolbar-row>
 
     <mat-toolbar-row class="child-options">
