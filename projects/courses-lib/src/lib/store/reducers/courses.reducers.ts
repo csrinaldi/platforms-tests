@@ -6,22 +6,25 @@ import {createEntityAdapter, EntityAdapter, EntityState} from "@ngrx/entity";
 export const coursesFeatureKey = 'courses';
 
 export interface CoursesState extends EntityState<Course>{
-  // courses: Course[];
   loadingCourses: boolean;
   loaded: boolean;
 }
 
 export const adapter : EntityAdapter<Course> =
   createEntityAdapter<Course>({
-    selectId: model => model.id
+    selectId: course => course.id, // Not necessary id property is default name used by @ngrx/entity
+    sortComparer: (a, b) => {
+      const compare = a.id - b.id;
+      if ( compare > 0 ){
+        return 1;
+      } else if ( compare < 0 ){
+        return -1
+      } else {
+        return 0;
+      }
+    }
   });
 
-
-/**
- *  // courses: [],
- *  // loadingCourses: false,
- *  // loaded: false
- */
 const initialState: CoursesState =  adapter.getInitialState({
   loadingCourses: false,
   loaded: false
@@ -30,17 +33,17 @@ const initialState: CoursesState =  adapter.getInitialState({
 export const reducer = createReducer(
   initialState,
   on(CourseActions.loadCoursesRequest, (state) => ({...state, loadingCourses: true})),
-  on(CourseActions.loadCoursesRequestSuccess, (state, {courses}) => (  adapter.addAll(courses, { ...state, loadingCourses: false, courses, loaded: true})))
+  on(CourseActions.loadCoursesRequestSuccess, (state, {courses}) => (  adapter.addAll(courses, { ...state, loadingCourses: false, loaded: true})))
 );
 
 export const coursesFeature = createFeatureSelector<CoursesState>(coursesFeatureKey);
 
-export const {
+const {
   selectAll,
   selectEntities,
   selectIds,
   selectTotal
-} = adapter.getSelectors();
+} = adapter.getSelectors(coursesFeature);
 
 /*export const courses = createSelector(
   coursesFeature,
@@ -49,6 +52,8 @@ export const {
     return s1.courses
   })
 );*/
+
+export const courses = selectAll;
 
 export const loadingCourses = createSelector(
   coursesFeature,

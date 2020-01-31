@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {EMPTY, Observable, of} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {Course} from '../model/course';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {select, Store} from '@ngrx/store';
 import {courses, CoursesState, loaded} from '../store/reducers/courses.reducers';
-import {catchError, filter, map, switchMap, take, tap} from 'rxjs/operators';
+import {catchError, map, switchMap, take} from 'rxjs/operators';
 import {loadCoursesRequest} from '../store/actions/courses.actions';
 
 @Injectable()
@@ -18,6 +18,7 @@ export class CoursesResolver implements Resolve<Observable<Course[]>> {
       select(loaded),
       switchMap((value: boolean) => {
         if ( value ) {
+          console.log("Estamos por aca")
           return this.store.select(courses);
         }else{
           this.store.dispatch(loadCoursesRequest());

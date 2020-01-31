@@ -13,7 +13,7 @@ const courses: Course[] = []
 export class CoursesService {
 
   constructor(private http: HttpClient) {
-    courses.push(new Course("Angular", 'Angular'));
+    courses.push(<Course>{ id: 1, name: 'Angular', description: 'Angular'});
   }
 
   public getAll(): Observable<Course[]>{

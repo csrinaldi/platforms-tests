@@ -5,9 +5,9 @@ import {Course} from "../model/course";
 
 
 const courses = [
-  new Course("Angular", "Angular Course for Dummy"),
-  new Course("React", "React Course for Dummy"),
-  new Course("Vue", "Vue Course for Dummy")
+  <Course>{id: 1, name:"Angular", description:"Angular Course for Dummy"},
+  <Course>{id: 2, name: "React", description: "React Course for Dummy"},
+  <Course>{id: 3, name: "Vue", description: "Vue Course for Dummy"}
 ]
 
 
