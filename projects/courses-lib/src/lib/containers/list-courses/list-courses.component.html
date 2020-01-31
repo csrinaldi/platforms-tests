@@ -1,18 +1,22 @@
 <div fxLayout="column" fxFlex="" fxFlexFill="">
-<mat-list>
-  <h3 mat-subheader>Courses</h3>
 
-  <mat-list-item *ngFor="let course of courses$">
-    <mat-icon mat-list-icon>folder</mat-icon>
-    <h4 mat-line>{{course.name}}</h4>
-    <p mat-line> {{ course.description }} </p>
-    <button mat-icon-button #menuTrigger="matMenuTrigger"  [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-  </mat-list-item>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item>View</button>
-    <button mat-menu-item>Another action</button>
-  </mat-menu>
-</mat-list>
+
+
+  <mat-list>
+    <h3 mat-subheader>Courses</h3>
+
+    <mat-list-item *ngFor="let course of courses$">
+      <mat-icon mat-list-icon>folder</mat-icon>
+      <h4 mat-line>{{course.name}}</h4>
+      <p mat-line> {{ course.description }} </p>
+      <button mat-icon-button #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>View</button>
+      <button mat-menu-item>Another action</button>
+    </mat-menu>
+  </mat-list>
 </div>

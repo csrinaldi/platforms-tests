@@ -3,11 +3,17 @@ import {createFeatureSelector, createReducer, createSelector, on} from '@ngrx/st
 import {CourseActions} from '../actions';
 import {createEntityAdapter, EntityAdapter, EntityState} from "@ngrx/entity";
 
+export enum ListViewMode {
+  GRID,
+  LIST
+}
+
 export const coursesFeatureKey = 'courses';
 
 export interface CoursesState extends EntityState<Course>{
   loadingCourses: boolean;
   loaded: boolean;
+  listViewMode: ListViewMode
 }
 
 export const adapter : EntityAdapter<Course> =
@@ -27,13 +33,15 @@ export const adapter : EntityAdapter<Course> =
 
 const initialState: CoursesState =  adapter.getInitialState({
   loadingCourses: false,
-  loaded: false
+  loaded: false,
+  listViewMode: ListViewMode.LIST
   });
 
 export const reducer = createReducer(
   initialState,
   on(CourseActions.loadCoursesRequest, (state) => ({...state, loadingCourses: true})),
-  on(CourseActions.loadCoursesRequestSuccess, (state, {courses}) => (  adapter.addAll(courses, { ...state, loadingCourses: false, loaded: true})))
+  on(CourseActions.loadCoursesRequestSuccess, (state, {courses}) => (  adapter.addAll(courses, { ...state, loadingCourses: false, loaded: true}))),
+  on(CourseActions.changeListViewmode, (state, {viewMode}) => (  { ...state, listViewMode: viewMode})),
 );
 
 export const coursesFeature = createFeatureSelector<CoursesState>(coursesFeatureKey);
