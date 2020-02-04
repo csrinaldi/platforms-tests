@@ -1,0 +1,17 @@
+:host {
+  height: 100%;
+  width: 100%;
+}
+
+:host .container {
+  padding: 20px;
+}
+
+:host .example-card {
+  width: 400px;
+}
+
+:host .example-card .header-image {
+  background-image: url('../../../assets/angular_logo.png');
+  background-size: cover;
+}
