@@ -1,0 +1,52 @@
+  <mat-toolbar color="#ffffff" class="mat-elevation-z1">
+    <mat-toolbar-row class="child-options">
+
+      <div style="padding-right: 32px" fxLayout="row" fxLayoutAlign="start center">
+        <button mat-icon-button="" (click)="toggle.emit()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <img src="{{logo$ | async}}">
+        <!--h3 style="margin-left: 20px">{{title}}</h3-->
+      </div>
+
+      <div fxFlex="">
+        <ng-content></ng-content>
+      </div>
+
+<!--      <ng-container-->
+<!--        *ngIf="hasSearch; then showSearchBox;">-->
+<!--      </ng-container>-->
+
+<!--      <ng-template #showSearchBox>-->
+<!--        <div fxFlex="" fxLayout="row" fxLayoutAlign="start center" class="search-container" #searchContainer>-->
+<!--          <mat-icon>search</mat-icon>-->
+<!--          <input fxFlex="" placeholder="Search Form">-->
+<!--          <button mat-icon-button="" (click)="openForm(searchContainer)">-->
+<!--            <mat-icon>keyboard_arrow_down</mat-icon>-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </ng-template>-->
+
+      <span fxFlex=""></span>
+      <ng-container *ngIf="(principal$ | async) !== undefined then loggedIn; else notLoggedIn"></ng-container>
+      <ng-template #loggedIn>
+        <h3> Logged In: {{ (principal$ | async).user.firstName}},  {{ (principal$ | async).user.lastName}}</h3>
+        <button *ngIf="hasLogout$ | async" mat-icon-button="" (click)="logout()">
+          <mat-icon class="mat-36">exit_to_app</mat-icon>
+        </button>
+      </ng-template>
+
+      <ng-template #notLoggedIn>
+        Not LoggedIn
+      </ng-template>
+
+    </mat-toolbar-row>
+
+    <mat-toolbar-row class="child-options">
+      <div fxFlex="row" fxLayoutAlign="end center">
+        <template #childOptions></template>
+      </div>
+    </mat-toolbar-row>
+
+  </mat-toolbar>
+
