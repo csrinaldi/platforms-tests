@@ -1,0 +1,7 @@
+:host {
+  height: 100%;
+}
+
+:host ::ng-deep mat-list-item {
+  border-bottom: 1px solid #dddddd;
+}
