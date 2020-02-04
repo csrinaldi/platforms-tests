@@ -4,7 +4,7 @@ import {Course} from '../model/course';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {select, Store} from '@ngrx/store';
 import {courses, CoursesState, loaded} from '../store/reducers/courses.reducers';
-import {catchError, map, switchMap, take} from 'rxjs/operators';
+import {catchError, filter, switchMap, take, tap, withLatestFrom} from 'rxjs/operators';
 import {loadCoursesRequest} from '../store/actions/courses.actions';
 
 @Injectable()
@@ -16,64 +16,28 @@ export class CoursesResolver implements Resolve<Observable<Course[]>> {
   getStoreOrApi(): Observable<Course[]> {
     return this.store.pipe(
       select(loaded),
-      switchMap((value: boolean) => {
-        if ( value ) {
-          console.log("Estamos por aca")
-          return this.store.select(courses);
-        }else{
+      tap((value: boolean) => {
+        console.log("Valor de carga; ", value)
+        if ( !value ) {
           this.store.dispatch(loadCoursesRequest());
         }
       }),
+      filter(value => value),
+      switchMap(() => this.store.select(courses)),
       take(1)
     )
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Course[]>{
     return this.getStoreOrApi().pipe(
+      filter(value => !!value),
       switchMap( (courses) => {
         return of(courses)
       }),
+
       catchError(err => {
-        throw err;
+        throw err
       })
     )
-
-    // return this.store.pipe(
-    //     select(loaded),
-    //     switchMap<boolean, Observable<Course[]>>((value, index) => {
-    //       if (value) {
-    //         console.log("Buscando");
-    //         return this.store.pipe(
-    //           select(courses),
-    //           filter(courses => {
-    //             console.log("Filtrando ", courses);
-    //             console.log(!!courses);
-    //
-    //             return !!courses
-    //           }),
-    //           map( value1 => {
-    //             return [];
-    //           })
-    //         )
-    //           // .pipe(
-    //           //   map (( courses) => {
-    //           //     console.log("Encontrado:    ", courses);
-    //           //     return [];
-    //           //   })
-    //           // );
-    //       } else {
-    //         console.log("haciendo dispatch")
-    //         this.store.dispatch(loadCoursesRequest());
-    //         return EMPTY;
-    //       }
-    //     }),
-    //     take(1),
-    //     catchError(err => {
-    //       console.log("----------------------")
-    //       console.log(err);
-    //       console.log("----------------------")
-    //       throw err;
-    //     })
-    // )
   }
 }
