@@ -24,6 +24,8 @@ import {MatCardModule} from '@angular/material/card';
 
 import {SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+
 
 const config: SocketIoConfig = {url: 'http://localhost:3000', options: {}};
 
@@ -42,6 +44,7 @@ const config: SocketIoConfig = {url: 'http://localhost:3000', options: {}};
     MatGridListModule,
     MatCardModule,
     MatDividerModule,
+    MatProgressBarModule,
 
 
     APP_ROUTERS,

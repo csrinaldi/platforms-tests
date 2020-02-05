@@ -7,8 +7,16 @@
   padding: 20px;
 }
 
-:host .example-card {
+:host .container-card{
   width: 400px;
+}
+
+:host .container-card-errors{
+  border: 1px solid darkred;
+}
+
+:host .example-card {
+
 }
 
 :host .example-card .header-image {
