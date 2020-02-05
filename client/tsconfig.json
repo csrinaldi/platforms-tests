@@ -27,6 +27,10 @@
       ],
       "core-lib": [
         "dist/core-lib"
+      ],
+      "chat-lib": [
+        "dist/chat-lib/chat-lib",
+        "dist/chat-lib"
       ]
     }
   },
