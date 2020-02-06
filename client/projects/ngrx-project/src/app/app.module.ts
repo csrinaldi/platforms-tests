@@ -22,6 +22,13 @@ import {LgkGrid} from './components/lgk-grid/lgk-grid';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
 
+import {SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+
+
+const config: SocketIoConfig = {url: 'http://localhost:3000', options: {}};
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -36,6 +43,8 @@ import {MatCardModule} from '@angular/material/card';
     MatIconModule,
     MatGridListModule,
     MatCardModule,
+    MatDividerModule,
+    MatProgressBarModule,
 
 
     APP_ROUTERS,
@@ -92,7 +101,8 @@ import {MatCardModule} from '@angular/material/card';
      * See: https://ngrx.io/guide/effects#registering-root-effects
      */
     EffectsModule.forRoot([RootEffects/*UserEffects, RouterEffects*/]),
-    FlexModule
+    FlexModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [],
   bootstrap: [

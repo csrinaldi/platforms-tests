@@ -363,6 +363,46 @@
           }
         }
       }
+    },
+    "chat-lib": {
+      "projectType": "library",
+      "root": "projects/chat-lib",
+      "sourceRoot": "projects/chat-lib/src",
+      "prefix": "chat-lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/chat-lib/tsconfig.lib.json",
+            "project": "projects/chat-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/chat-lib/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/chat-lib/src/test.ts",
+            "tsConfig": "projects/chat-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/chat-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/chat-lib/tsconfig.lib.json",
+              "projects/chat-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngrx-project",

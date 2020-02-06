@@ -12,8 +12,9 @@ export const coursesFeatureKey = 'courses';
 
 export interface CoursesState extends EntityState<Course> {
   loadingCourses: boolean;
+  loadingErrors: any[];
   loaded: boolean;
-  listViewMode: ListViewMode
+  listViewMode: ListViewMode;
 }
 
 export const adapter: EntityAdapter<Course> =
@@ -31,8 +32,9 @@ export const adapter: EntityAdapter<Course> =
     }
   });
 
-const initialState: CoursesState = adapter.getInitialState({
+const initialState: EntityState<Course> = adapter.getInitialState({
   loadingCourses: false,
+  loadingErrors: [],
   loaded: false,
   listViewMode: ListViewMode.LIST
 });
@@ -40,11 +42,13 @@ const initialState: CoursesState = adapter.getInitialState({
 export const reducer = createReducer(
   initialState,
   on(CourseActions.loadCoursesRequest, (state) => ({...state, loadingCourses: true})),
+  on(CourseActions.loadCoursesRequestFailure, (state, errors) => ({...state, loadingCourses: false, loadingErrors: errors})),
   on(CourseActions.loadCoursesRequestSuccess, (state, {courses}) => (adapter.addAll(courses, {
     ...state,
     loadingCourses: false,
     loaded: true
   }))),
+
   on(CourseActions.changeListViewmode, (state, {viewMode}) => ({...state, listViewMode: viewMode})),
 );
 
@@ -70,6 +74,11 @@ export const courses = selectAll;
 export const loadingCourses = createSelector(
   coursesFeature,
   (s1 => s1.loadingCourses)
+);
+
+export const loadingErrors = createSelector(
+  coursesFeature,
+  (s1 => s1.loadingErrors)
 );
 
 export const loaded = createSelector(

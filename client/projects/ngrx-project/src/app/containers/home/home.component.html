@@ -1,19 +1,33 @@
-<div fxLayout="row" fxFlex="" class="container">
+<div fxLayout="column" fxFlex="" class="container">
   <!--lgk-grid></lgk-grid-->
-  <mat-card class="example-card">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Courses</mat-card-title>
-      <mat-card-subtitle>Angular and More</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="assets/courses.jpeg" alt="Photo of a Shiba Inu">
-    <mat-card-content>
-      <p>
-        Access to courses of Angular and more!!!
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button (click)="toCourses()">Access</button>
-    </mat-card-actions>
-  </mat-card>
+  <div fxLayout="column" fxFlex="" class="container-card" [ngClass]="{'container-card-errors': (loadingErrors$ | async)}">
+    <mat-progress-bar *ngIf="loadingCourses$ | async"></mat-progress-bar>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Courses</mat-card-title>
+        <mat-card-subtitle>Angular and More</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="assets/courses.jpeg" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>
+          Access to courses of Angular and more!!!
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="toCourses()">Access</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <mat-divider style="margin-top: 20px; margin-bottom: 20px"></mat-divider>
+
+  <div fxFlex="" fxLayout="column">
+
+    <h3>Web Socket Information</h3>
+
+
+  </div>
+
+
 </div>
