@@ -10,7 +10,7 @@ import {ToolbarComponent} from './components/toolbar/toolbar.component';
 import {StoreModule} from '@ngrx/store';
 import * as forCore from './store/reducers';
 import {fakeBackendProvider} from './helpers';
-import {AuthService} from './services/AuthService';
+import {AuthService} from './services/auth.service';
 import {EffectsModule} from '@ngrx/effects';
 import {AuthEffects} from './store/effects/auth.effects';
 import {AuthGuard} from './services/authGuard';

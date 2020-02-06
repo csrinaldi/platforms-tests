@@ -17,7 +17,12 @@ export class ChatEffects {
   connectToChatEffect$ = createEffect(() => this.actions$
     .pipe(
       ofType(ChatActions.chatConnectionRequest.type),
+      // map(({url, token}) => {
+      //   const wsUrl = (url as string).replace(/^http/, 'ws');
+      //   return { url: wsUrl, token};
+      // }),
       switchMap(({url, token}) => {
+          console.log('url - token', {url, token});
           return this.chatService.connect(url, token)
             .pipe(
               map(() => {

@@ -8,7 +8,6 @@ import {ActivatedRouteSnapshot, CanActivate, Router} from '@angular/router';
 
 import * as fromCore from '../store';
 import {select, Store} from '@ngrx/store';
-import {AuthService} from './AuthService';
 import {Observable} from 'rxjs';
 import {map, take} from 'rxjs/operators';
 
@@ -18,7 +17,6 @@ import {map, take} from 'rxjs/operators';
 export class AuthGuard implements CanActivate {
   constructor(
     private store: Store<fromCore.AuthState>,
-    private authService: AuthService,
     private router: Router) {
 
     console.log('Activando AuthGuard');

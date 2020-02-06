@@ -20,5 +20,5 @@ export const chatConnectionRequest = createAction(
  * Represent an Request Success of Load a set of courses
  */
 export const chatConnectionRequestSuccess = createAction(
-  ChatActionTypes.ChatConnectionRequest
+  ChatActionTypes.ChatConnectionRequestSuccess
 );

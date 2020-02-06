@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {WebSocketSubject} from 'rxjs/internal-compatibility';
-import {Observable} from 'rxjs';
-import {webSocket} from 'rxjs/webSocket';
+import {Observable, of} from 'rxjs';
+import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
+import {catchError, delay, map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -11,19 +11,46 @@ export class ChatLibService {
   connection$: WebSocketSubject<any>;
   RETRY_SECONDS = 10;
 
-  constructor() {
+  constructor() {}
+
+  connect(url: string, token: string): Observable<boolean> {
+    // if (url === undefined || url === '' || token === undefined || token === '') {
+    //   throw new Error('Error en los parametros de coneccion');
+    // }
+
+
+    if (!this.connection$) {
+      this.connection$ = webSocket({
+        url: 'ws://localhost:3000',
+        openObserver: {
+          next: () => {
+            console.log('connetion ok');
+          }
+        },
+      });
+
+      if ( this.connection$ ) {
+        this.connection$.subscribe(
+          msg => this.processMessage(msg), // Called whenever there is a message from the server.
+          err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
+          () => console.log('complete') // Called when connection is closed (for whatever reason).
+        );
+      }
+      // this.connection$.subscribe(
+      //   msg => console.log('message received: ' + msg), // Called whenever there is a message from the server.
+      //   err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
+      //   () => console.log('complete') // Called when connection is closed (for whatever reason).
+      // );
+    }
+
+    return of(true);
   }
 
-  connect(url: string, token: string): Observable<any> {
-    if (url === undefined || url === '' || token === undefined || token === '') {
-      throw new Error('Error en los parametros de coneccion');
-    }
+  send(msg: string) {
+    this.connection$.next(msg);
+  }
 
-    if (this.connection$) {
-      return this.connection$;
-    } else {
-      this.connection$ = webSocket(url);
-      return this.connection$;
-    }
+  private processMessage(msg: any) {
+
   }
 }

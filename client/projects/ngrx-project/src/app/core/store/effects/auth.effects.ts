@@ -1,10 +1,12 @@
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {Injectable} from '@angular/core';
-import {AuthService} from '../../services/AuthService';
+import {AuthService} from '../../services/auth.service';
 import * as fromCore from '../actions';
 import {catchError, map, mapTo, switchMap, tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {of} from 'rxjs';
+
+import {ChatActions} from 'chat-lib';
 
 @Injectable()
 export class AuthEffects {
@@ -23,7 +25,10 @@ export class AuthEffects {
         switchMap((value) => {
             console.log('En el Efecto!!!! ', value);
             return this.authService.login(value.credentials).pipe(
-              map(value1 => (fromCore.loginSuccess({principal: value1}))),
+              switchMap(value1 => [
+                (fromCore.loginSuccess({principal: value1})),
+                (ChatActions.chatConnectionRequest( {url: '/streams', token: value1.token}))
+              ]),
               catchError((err, caught) =>
                 of(fromCore.loginFailure({error: err})))
             );

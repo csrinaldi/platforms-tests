@@ -21,13 +21,9 @@ import {FlexModule} from '@angular/flex-layout';
 import {LgkGrid} from './components/lgk-grid/lgk-grid';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
-
-import {SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
 import {MatDividerModule} from '@angular/material/divider';
-import {MatProgressBarModule} from "@angular/material/progress-bar";
-
-
-const config: SocketIoConfig = {url: 'http://localhost:3000', options: {}};
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {ChatLibModule} from 'chat-lib';
 
 @NgModule({
   declarations: [
@@ -39,16 +35,16 @@ const config: SocketIoConfig = {url: 'http://localhost:3000', options: {}};
     BrowserAnimationsModule,
     HttpClientModule,
     CoreModule,
+
+    ChatLibModule,
+
     MatButtonModule,
     MatIconModule,
     MatGridListModule,
     MatCardModule,
     MatDividerModule,
     MatProgressBarModule,
-
-
     APP_ROUTERS,
-
 
     /**
      * StoreModule.forRoot is imported once in the root module, accepting a reducer
@@ -101,8 +97,7 @@ const config: SocketIoConfig = {url: 'http://localhost:3000', options: {}};
      * See: https://ngrx.io/guide/effects#registering-root-effects
      */
     EffectsModule.forRoot([RootEffects/*UserEffects, RouterEffects*/]),
-    FlexModule,
-    SocketIoModule.forRoot(config)
+    FlexModule
   ],
   providers: [],
   bootstrap: [

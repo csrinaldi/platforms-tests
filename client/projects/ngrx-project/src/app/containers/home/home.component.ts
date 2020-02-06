@@ -6,6 +6,7 @@ import {select, Store} from '@ngrx/store';
 import {Principal} from '../../core/domain/principal';
 import {Router} from '@angular/router';
 import {CourseReducer} from 'courses-lib';
+import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
 
 
 
@@ -20,8 +21,7 @@ export class HomeComponent implements OnInit {
   loadingCourses$: Observable<boolean>;
   loadingErrors$: Observable<any[]>;
 
-  constructor(private store: Store<CoreState>, private router: Router) {
-  }
+  constructor(private store: Store<CoreState>, private router: Router) {}
 
   ngOnInit() {
     this.principal$ = this.store.pipe(select(fromCore.principal));
