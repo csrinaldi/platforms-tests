@@ -27,9 +27,10 @@ import {MatMenuModule} from '@angular/material/menu';
     CourseStoreModule,
     SCHEDULER_ROUTERS
   ],
-  exports: [
-    CourseSearchFormComponent
-  ],
+    exports: [
+        CourseSearchFormComponent,
+        ListCoursesComponent
+    ],
   entryComponents: [
     CourseSearchFormComponent
   ],

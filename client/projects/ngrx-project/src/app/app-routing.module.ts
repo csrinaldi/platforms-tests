@@ -1,14 +1,13 @@
 import {ModuleWithProviders} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './containers/home/home.component';
-import {AuthGuard} from './core/services/authGuard';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     data: {
       toolbar: true
     }
@@ -21,10 +20,21 @@ const routes: Routes = [
     },
     loadChildren: () =>
       import('courses-lib').then(module => module.CourseModule),
-    //canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
 
+  {
+    path: 'chats',
+    data: {
+      toolbar: true
+    },
+    loadChildren: () =>
+      import('chat-lib').then(module => module.ChatLibModule)
+  }
 
 ];
 
-export const APP_ROUTERS: ModuleWithProviders = RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload', useHash: true});
+export const APP_ROUTERS: ModuleWithProviders = RouterModule.forRoot(routes, {
+  onSameUrlNavigation: 'reload',
+  useHash: true
+});

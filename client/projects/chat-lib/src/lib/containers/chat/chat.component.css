@@ -1,0 +1,19 @@
+:host {
+  height: 100%;
+}
+
+:host .chat{
+  border: 1px solid #4285f4;
+}
+
+:host .chat-container {
+  border: 1px solid #ff9800;
+}
+
+:host .chat-container chat-list{
+  border: 1px solid #202124;
+}
+
+:host .chat-actions {
+  border: 1px solid brown;
+}

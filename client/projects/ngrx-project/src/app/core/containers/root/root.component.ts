@@ -29,7 +29,7 @@ export class RootComponent implements OnInit {
   }
 
   onHome() {
-    this.router.navigate(['/home'])
+    this.router.navigate(['/chats'])
       .then(value => console.log('Todo OK', value))
       .catch(reason => {
         console.log('Todo Mal', reason);
