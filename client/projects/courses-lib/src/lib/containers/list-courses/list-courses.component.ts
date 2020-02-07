@@ -1,24 +1,24 @@
 import {Component, ComponentFactoryResolver, Injector, OnInit} from '@angular/core';
-import {Course} from '../../model/course';
-import {ResolverService} from 'commons-lib';
 import {ActivatedRoute} from '@angular/router';
 
+export interface Thread {
+
+
+}
+
 @Component({
-  selector: 'app-list-courses',
+  selector: 'chat-list',
   templateUrl: './list-courses.component.html',
   styleUrls: ['./list-courses.component.scss']
 })
 export class ListCoursesComponent implements OnInit {
 
-  courses$: Course[];
+  threads$: Thread[];
 
-  constructor(private route: ActivatedRoute, private resolverService: ResolverService, private resolver: ComponentFactoryResolver, private injector: Injector) {
-    console.log('Construyendo ....' + resolverService.n);
-    resolverService.receiveContext(resolver, injector);
-  }
+  constructor() {}
 
   ngOnInit() {
-    this.courses$ = this.route.snapshot.data['courses$'];
+    // this.courses$ = this.route.snapshot.data['courses$'];
   }
 
 }
